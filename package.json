@@ -1,0 +1,42 @@
+{
+  "name": "watchtower",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=24.22.0 <25",
+    "pnpm": "12.11.2"
+  },
+  "scripts": {
+    "dev": "pnpm build:packages && pnpm --filter @watchtower/web dev",
+    "dev:worker": "pnpm build:packages && pnpm --filter @watchtower/worker dev",
+    "build:packages": "pnpm --filter @watchtower/runtime build && pnpm --filter @watchtower/database build",
+    "build": "pnpm build:packages && pnpm --filter @watchtower/worker build && pnpm --filter @watchtower/web build",
+    "typecheck": "pnpm build:packages && pnpm --filter @watchtower/worker typecheck && pnpm --filter @watchtower/web typecheck",
+    "lint": "eslint . --max-warnings 0",
+    "lint:typed": "eslint --config eslint.typed.config.mjs . --max-warnings 0",
+    "lint:rules": "node scripts/verify-quality-rules.mjs ./eslint-rules/index.cjs",
+    "test": "pnpm --filter @watchtower/runtime build && vitest run",
+    "test:watch": "vitest",
+    "test:worker": "node scripts/worker-smoke.mjs",
+    "test:browser": "playwright test",
+    "db:up": "docker compose up -d --wait postgres",
+    "db:stop": "docker compose stop postgres",
+    "db:generate": "pnpm --filter @watchtower/database db:generate",
+    "db:migrate": "pnpm --filter @watchtower/database db:migrate",
+    "test:db": "pnpm --filter @watchtower/database test:integration",
+    "db:usage": "pnpm --filter @watchtower/database db:usage",
+    "check": "pnpm lint && pnpm typecheck && pnpm lint:typed && pnpm lint:rules && pnpm test && pnpm build && pnpm test:worker"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.2",
+    "eslint-plugin-drizzle": "0.2.3",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.0",
+    "vitest": "5.0.5"
+  }
+}

@@ -1,0 +1,8 @@
+Scope: all 5 workspace projects
+✓ Lockfile passes supply-chain policies (verified 1m ago)
+.                                        | [WARN] deprecated eslint@9.39.5. 10.13.0 is not deprecated.
+[WARN] 2 deprecated subdependencies found: @esbuild-kit/core-utils@3.3.2, @esbuild-kit/esm-loader@2.6.5
+Packages: +1 -23
++-----------------------
+Progress: resolved 1, reused 452, downloaded 0, added 1, done
+Done in 567ms using pnpm v12.11.2

@@ -1,0 +1,70 @@
+{
+  "project": {
+    "framework": "Next.js",
+    "frameworkName": "next-app",
+    "frameworkVersion": "16.4.2",
+    "srcDirectory": true,
+    "rsc": true,
+    "typescript": true,
+    "tailwindVersion": "v4",
+    "tailwindConfig": null,
+    "tailwindCss": "src/app/globals.css",
+    "importAlias": "@"
+  },
+  "config": {
+    "style": "base-nova",
+    "base": "base",
+    "rsc": true,
+    "typescript": true,
+    "iconLibrary": "lucide",
+    "rtl": false,
+    "menuColor": "default",
+    "menuAccent": "subtle",
+    "aliases": {
+      "components": "@/components",
+      "utils": "@/lib/utils",
+      "ui": "@/components/ui",
+      "lib": "@/lib",
+      "hooks": "@/hooks"
+    },
+    "resolvedPaths": {
+      "cwd": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web",
+      "tailwindConfig": null,
+      "tailwindCss": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web/src/app/globals.css",
+      "utils": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web/src/lib/utils",
+      "components": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web/src/components",
+      "lib": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web/src/lib",
+      "hooks": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web/src/hooks",
+      "ui": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web/src/components/ui"
+    },
+    "registries": {
+      "@shadcn": "https://ui.shadcn.com/r/styles/{style}/{name}.json"
+    }
+  },
+  "preset": {
+    "code": "b2fA",
+    "fallbacks": [
+      "font"
+    ],
+    "values": {
+      "style": "nova",
+      "baseColor": "neutral",
+      "theme": "neutral",
+      "chartColor": "neutral",
+      "iconLibrary": "lucide",
+      "font": "geist",
+      "fontHeading": "inherit",
+      "radius": "default",
+      "menuAccent": "subtle",
+      "menuColor": "default"
+    }
+  },
+  "components": [],
+  "links": {
+    "docs": "https://ui.shadcn.com/docs",
+    "components": "https://ui.shadcn.com/docs/components/base/[component].md",
+    "ui": "https://ui.shadcn.com/code/apps/v4/registry/bases/base/ui/[component].tsx",
+    "examples": "https://ui.shadcn.com/code/apps/v4/registry/bases/base/examples/[component]-example.tsx",
+    "schema": "https://ui.shadcn.com/schema.json"
+  }
+}

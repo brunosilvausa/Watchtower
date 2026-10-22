@@ -1,0 +1,10 @@
+$ pnpm --filter @watchtower/database db:generate
+$ drizzle-kit generate
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/packages/database/drizzle.config.ts'
+3 tables
+memberships 4 columns 1 indexes 2 fks
+users 2 columns 0 indexes 0 fks
+workspaces 4 columns 0 indexes 0 fks
+
+No schema changes, nothing to migrate 😴

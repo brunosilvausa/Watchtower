@@ -1,0 +1,4 @@
+$ eslint --config eslint.typed.config.mjs . --max-warnings 0
+real 3.25
+user 3.81
+sys 0.63

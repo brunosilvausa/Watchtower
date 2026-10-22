@@ -1,0 +1,21 @@
+name: watchtower-m1
+services:
+  postgres:
+    image: postgres:18.3-bookworm@sha256:80630f83606d8db77d30b3851b16a9f78be2d0d4dda6f7b82a1fdca5ebe3acba
+    environment:
+      POSTGRES_DB: watchtower_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: local-bootstrap-only
+    ports:
+      - '127.0.0.1:55432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./infra/postgres/001-roles.sql:/docker-entrypoint-initdb.d/001-roles.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d watchtower_dev']
+      interval: 2s
+      timeout: 3s
+      retries: 20
+    restart: 'no'
+volumes:
+  postgres_data:

@@ -1,0 +1,56 @@
+$ pnpm lint && pnpm typecheck && pnpm lint:typed && pnpm lint:rules && pnpm test && pnpm build && pnpm test:worker
+$ eslint . --max-warnings 0
+$ pnpm build:packages && pnpm --filter @watchtower/worker typecheck && pnpm --filter @watchtower/web typecheck
+$ pnpm --filter @watchtower/runtime build && pnpm --filter @watchtower/database build
+$ tsc -p tsconfig.json
+$ tsc -p tsconfig.json
+$ tsc -p tsconfig.json --noEmit
+$ next typegen && tsc --noEmit
+Generating route types...
+✓ Types generated successfully
+$ eslint --config eslint.typed.config.mjs . --max-warnings 0
+$ node scripts/verify-quality-rules.mjs ./eslint-rules/index.cjs
+quality/max-lines: ok
+quality/no-direct-console: ok
+quality/no-direct-data-access: ok
+$ pnpm --filter @watchtower/runtime build && vitest run
+$ tsc -p tsconfig.json
+
+ RUN  v5.0.5 /Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower
+
+
+ Test Files  6 passed (6)
+      Tests  21 passed (21)
+   Start at  23:17:36
+   Duration  331ms (tests 47%, transform 28%, import 22%, worker 3%)
+
+$ pnpm build:packages && pnpm --filter @watchtower/worker build && pnpm --filter @watchtower/web build
+$ pnpm --filter @watchtower/runtime build && pnpm --filter @watchtower/database build
+$ tsc -p tsconfig.json
+$ tsc -p tsconfig.json
+$ tsc -p tsconfig.json
+$ next build
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 14ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 322ms
+  Running TypeScript ...
+  Finished TypeScript in 777ms ...
+  Collecting page data using 5 workers ...
+  Generating static pages using 5 workers (0/4) ...
+  Generating static pages using 5 workers (1/4) 
+  Generating static pages using 5 workers (2/4) 
+  Generating static pages using 5 workers (3/4) 
+✓ Generating static pages using 5 workers (4/4) in 187ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+└ ○ /_not-found
+
+
+○  (Static)  prerendered as static content
+
+$ node scripts/worker-smoke.mjs
+PASS worker startup, resource metrics and SIGTERM shutdown; no jobs executed

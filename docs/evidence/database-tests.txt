@@ -1,0 +1,11 @@
+$ pnpm --filter @watchtower/database test:integration
+$ node --env-file=../../.env ../../node_modules/vitest/vitest.mjs run --config vitest.integration.config.ts
+
+ RUN  v5.0.5 /Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/packages/database
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  23:17:29
+   Duration  470ms (import 71%, tests 23%, transform 5%, worker 1%)
+

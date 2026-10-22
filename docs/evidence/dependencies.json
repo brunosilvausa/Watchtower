@@ -1,0 +1,407 @@
+[
+  {
+    "name": "watchtower",
+    "version": "0.1.0",
+    "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower",
+    "private": true,
+    "devDependencies": {
+      "@playwright/test": {
+        "from": "@playwright/test",
+        "version": "1.64.1",
+        "resolved": "https://registry.npmjs.org/@playwright/test/-/test-1.64.1.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test"
+      },
+      "@types/node": {
+        "from": "@types/node",
+        "version": "24.19.2",
+        "resolved": "https://registry.npmjs.org/@types/node/-/node-24.19.2.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@types+node@24.19.2/node_modules/@types/node"
+      },
+      "eslint": {
+        "from": "eslint",
+        "version": "9.39.5",
+        "resolved": "https://registry.npmjs.org/eslint/-/eslint-9.39.5.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint"
+      },
+      "eslint-config-next": {
+        "from": "eslint-config-next",
+        "version": "16.4.2",
+        "resolved": "https://registry.npmjs.org/eslint-config-next/-/eslint-config-next-16.4.2.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next"
+      },
+      "eslint-plugin-drizzle": {
+        "from": "eslint-plugin-drizzle",
+        "version": "0.2.3",
+        "resolved": "https://registry.npmjs.org/eslint-plugin-drizzle/-/eslint-plugin-drizzle-0.2.3.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle"
+      },
+      "tsx": {
+        "from": "tsx",
+        "version": "4.23.15",
+        "resolved": "https://registry.npmjs.org/tsx/-/tsx-4.23.15.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/tsx@4.23.15/node_modules/tsx"
+      },
+      "typescript": {
+        "from": "typescript",
+        "version": "5.9.3",
+        "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript"
+      },
+      "typescript-eslint": {
+        "from": "typescript-eslint",
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/typescript-eslint/-/typescript-eslint-8.72.0.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint"
+      },
+      "vitest": {
+        "from": "vitest",
+        "version": "5.0.5",
+        "resolved": "https://registry.npmjs.org/vitest/-/vitest-5.0.5.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest"
+      }
+    }
+  },
+  {
+    "name": "@watchtower/web",
+    "version": "0.1.0",
+    "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web",
+    "private": true,
+    "dependencies": {
+      "@watchtower/runtime": {
+        "from": "@watchtower/runtime",
+        "version": "link:../../packages/runtime",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/packages/runtime"
+      },
+      "better-auth": {
+        "from": "better-auth",
+        "version": "1.7.12",
+        "resolved": "https://registry.npmjs.org/better-auth/-/better-auth-1.7.12.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/better-auth@1.7.12_drizzle-kit@0.31.11_drizzle-orm@0.45.4_@types+pg@8.23.1_kysely@0.29._0888cbd5dad713fc1fd4883ab630b2c6/node_modules/better-auth"
+      },
+      "clsx": {
+        "from": "clsx",
+        "version": "2.1.1",
+        "resolved": "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/clsx@2.1.1/node_modules/clsx"
+      },
+      "next": {
+        "from": "next",
+        "version": "16.4.2",
+        "resolved": "https://registry.npmjs.org/next/-/next-16.4.2.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/next@16.4.2_@babel+core@7.29.7_supports-color@7.2.0__@playwright+test@1.64.1_@types+nod_afc601c34e4dbab6725386c6c0360702/node_modules/next"
+      },
+      "react": {
+        "from": "react",
+        "version": "19.3.0",
+        "resolved": "https://registry.npmjs.org/react/-/react-19.3.0.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/react@19.3.0/node_modules/react"
+      },
+      "react-dom": {
+        "from": "react-dom",
+        "version": "19.3.0",
+        "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-19.3.0.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/react-dom@19.3.0_react@19.3.0/node_modules/react-dom"
+      },
+      "server-only": {
+        "from": "server-only",
+        "version": "0.0.1",
+        "resolved": "https://registry.npmjs.org/server-only/-/server-only-0.0.1.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/server-only@0.0.1/node_modules/server-only"
+      },
+      "tailwind-merge": {
+        "from": "tailwind-merge",
+        "version": "3.7.0",
+        "resolved": "https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-3.7.0.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/tailwind-merge@3.7.0/node_modules/tailwind-merge"
+      }
+    },
+    "devDependencies": {
+      "@tailwindcss/turbopack": {
+        "from": "@tailwindcss/turbopack",
+        "version": "4.3.3",
+        "resolved": "https://registry.npmjs.org/@tailwindcss/turbopack/-/turbopack-4.3.3.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@tailwindcss+turbopack@4.3.3/node_modules/@tailwindcss/turbopack"
+      },
+      "@types/node": {
+        "from": "@types/node",
+        "version": "24.19.2",
+        "resolved": "https://registry.npmjs.org/@types/node/-/node-24.19.2.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@types+node@24.19.2/node_modules/@types/node"
+      },
+      "@types/react": {
+        "from": "@types/react",
+        "version": "19.3.0",
+        "resolved": "https://registry.npmjs.org/@types/react/-/react-19.3.0.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@types+react@19.3.0/node_modules/@types/react"
+      },
+      "@types/react-dom": {
+        "from": "@types/react-dom",
+        "version": "19.3.0",
+        "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.3.0.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@types+react-dom@19.3.0_@types+react@19.3.0/node_modules/@types/react-dom"
+      },
+      "tailwindcss": {
+        "from": "tailwindcss",
+        "version": "4.3.3",
+        "resolved": "https://registry.npmjs.org/tailwindcss/-/tailwindcss-4.3.3.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/tailwindcss@4.3.3/node_modules/tailwindcss"
+      },
+      "typescript": {
+        "from": "typescript",
+        "version": "5.9.3",
+        "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript"
+      }
+    },
+    "unsavedDependencies": {
+      "@playwright/test": {
+        "from": "@playwright/test",
+        "version": "link:../../node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test"
+      },
+      "eslint": {
+        "from": "eslint",
+        "version": "link:../../node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint"
+      },
+      "eslint-config-next": {
+        "from": "eslint-config-next",
+        "version": "link:../../node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next"
+      },
+      "eslint-plugin-drizzle": {
+        "from": "eslint-plugin-drizzle",
+        "version": "link:../../node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle"
+      },
+      "tsx": {
+        "from": "tsx",
+        "version": "link:../../node_modules/.pnpm/tsx@4.23.15/node_modules/tsx",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/tsx@4.23.15/node_modules/tsx"
+      },
+      "typescript-eslint": {
+        "from": "typescript-eslint",
+        "version": "link:../../node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint"
+      },
+      "vitest": {
+        "from": "vitest",
+        "version": "link:../../node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest"
+      }
+    }
+  },
+  {
+    "name": "@watchtower/worker",
+    "version": "0.1.0",
+    "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/worker",
+    "private": true,
+    "dependencies": {
+      "@watchtower/runtime": {
+        "from": "@watchtower/runtime",
+        "version": "link:../../packages/runtime",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/packages/runtime"
+      }
+    },
+    "unsavedDependencies": {
+      "@playwright/test": {
+        "from": "@playwright/test",
+        "version": "link:../../node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test"
+      },
+      "@types/node": {
+        "from": "@types/node",
+        "version": "link:../../node_modules/.pnpm/@types+node@24.19.2/node_modules/@types/node",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@types+node@24.19.2/node_modules/@types/node"
+      },
+      "eslint": {
+        "from": "eslint",
+        "version": "link:../../node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint"
+      },
+      "eslint-config-next": {
+        "from": "eslint-config-next",
+        "version": "link:../../node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next"
+      },
+      "eslint-plugin-drizzle": {
+        "from": "eslint-plugin-drizzle",
+        "version": "link:../../node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle"
+      },
+      "tsx": {
+        "from": "tsx",
+        "version": "link:../../node_modules/.pnpm/tsx@4.23.15/node_modules/tsx",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/tsx@4.23.15/node_modules/tsx"
+      },
+      "typescript": {
+        "from": "typescript",
+        "version": "link:../../node_modules/.pnpm/typescript@5.9.3/node_modules/typescript",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript"
+      },
+      "typescript-eslint": {
+        "from": "typescript-eslint",
+        "version": "link:../../node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint"
+      },
+      "vitest": {
+        "from": "vitest",
+        "version": "link:../../node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest"
+      }
+    }
+  },
+  {
+    "name": "@watchtower/database",
+    "version": "0.0.0",
+    "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/packages/database",
+    "private": true,
+    "dependencies": {
+      "@watchtower/runtime": {
+        "from": "@watchtower/runtime",
+        "version": "link:../runtime",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/packages/runtime"
+      },
+      "drizzle-orm": {
+        "from": "drizzle-orm",
+        "version": "0.45.4",
+        "resolved": "https://registry.npmjs.org/drizzle-orm/-/drizzle-orm-0.45.4.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/drizzle-orm@0.45.4_@types+pg@8.23.1_kysely@0.29.7_pg@8.23.1/node_modules/drizzle-orm"
+      },
+      "pg": {
+        "from": "pg",
+        "version": "8.23.1",
+        "resolved": "https://registry.npmjs.org/pg/-/pg-8.23.1.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/pg@8.23.1/node_modules/pg"
+      }
+    },
+    "devDependencies": {
+      "@types/pg": {
+        "from": "@types/pg",
+        "version": "8.23.1",
+        "resolved": "https://registry.npmjs.org/@types/pg/-/pg-8.23.1.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@types+pg@8.23.1/node_modules/@types/pg"
+      },
+      "drizzle-kit": {
+        "from": "drizzle-kit",
+        "version": "0.31.11",
+        "resolved": "https://registry.npmjs.org/drizzle-kit/-/drizzle-kit-0.31.11.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/drizzle-kit@0.31.11/node_modules/drizzle-kit"
+      }
+    },
+    "unsavedDependencies": {
+      "@playwright/test": {
+        "from": "@playwright/test",
+        "version": "link:../../node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test"
+      },
+      "@types/node": {
+        "from": "@types/node",
+        "version": "link:../../node_modules/.pnpm/@types+node@24.19.2/node_modules/@types/node",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@types+node@24.19.2/node_modules/@types/node"
+      },
+      "eslint": {
+        "from": "eslint",
+        "version": "link:../../node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint"
+      },
+      "eslint-config-next": {
+        "from": "eslint-config-next",
+        "version": "link:../../node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next"
+      },
+      "eslint-plugin-drizzle": {
+        "from": "eslint-plugin-drizzle",
+        "version": "link:../../node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle"
+      },
+      "tsx": {
+        "from": "tsx",
+        "version": "link:../../node_modules/.pnpm/tsx@4.23.15/node_modules/tsx",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/tsx@4.23.15/node_modules/tsx"
+      },
+      "typescript": {
+        "from": "typescript",
+        "version": "link:../../node_modules/.pnpm/typescript@5.9.3/node_modules/typescript",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript"
+      },
+      "typescript-eslint": {
+        "from": "typescript-eslint",
+        "version": "link:../../node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint"
+      },
+      "vitest": {
+        "from": "vitest",
+        "version": "link:../../node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest"
+      }
+    }
+  },
+  {
+    "name": "@watchtower/runtime",
+    "version": "0.1.0",
+    "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/packages/runtime",
+    "private": true,
+    "dependencies": {
+      "pino": {
+        "from": "pino",
+        "version": "10.4.0",
+        "resolved": "https://registry.npmjs.org/pino/-/pino-10.4.0.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/pino@10.4.0/node_modules/pino"
+      },
+      "zod": {
+        "from": "zod",
+        "version": "4.6.7",
+        "resolved": "https://registry.npmjs.org/zod/-/zod-4.6.7.tgz",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/zod@4.6.7/node_modules/zod"
+      }
+    },
+    "unsavedDependencies": {
+      "@playwright/test": {
+        "from": "@playwright/test",
+        "version": "link:../../node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@playwright+test@1.64.1/node_modules/@playwright/test"
+      },
+      "@types/node": {
+        "from": "@types/node",
+        "version": "link:../../node_modules/.pnpm/@types+node@24.19.2/node_modules/@types/node",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/@types+node@24.19.2/node_modules/@types/node"
+      },
+      "eslint": {
+        "from": "eslint",
+        "version": "link:../../node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0/node_modules/eslint"
+      },
+      "eslint-config-next": {
+        "from": "eslint-config-next",
+        "version": "link:../../node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-config-next@16.4.2_@typescript-eslint+parser@8.72.0_eslint@9.39.5_jiti@2.7.0_sup_7de9b3292ab058260d10ed957e63d28c/node_modules/eslint-config-next"
+      },
+      "eslint-plugin-drizzle": {
+        "from": "eslint-plugin-drizzle",
+        "version": "link:../../node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/eslint-plugin-drizzle@0.2.3_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0_/node_modules/eslint-plugin-drizzle"
+      },
+      "tsx": {
+        "from": "tsx",
+        "version": "link:../../node_modules/.pnpm/tsx@4.23.15/node_modules/tsx",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/tsx@4.23.15/node_modules/tsx"
+      },
+      "typescript": {
+        "from": "typescript",
+        "version": "link:../../node_modules/.pnpm/typescript@5.9.3/node_modules/typescript",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript"
+      },
+      "typescript-eslint": {
+        "from": "typescript-eslint",
+        "version": "link:../../node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/typescript-eslint@8.72.0_eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0__supports-color@7.2.0_typescript@5.9.3/node_modules/typescript-eslint"
+      },
+      "vitest": {
+        "from": "vitest",
+        "version": "link:../../node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest",
+        "path": "/Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/node_modules/.pnpm/vitest@5.0.5_@types+node@24.19.2_vite@8.3.4_@types+node@24.19.2_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_/node_modules/vitest"
+      }
+    }
+  }
+]

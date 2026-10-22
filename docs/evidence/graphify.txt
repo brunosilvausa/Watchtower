@@ -1,0 +1,8 @@
+  warning: 3 .sql file(s) contributed nothing to the graph because a dependency is missing: tree_sitter_sql not installed. Install it with: pip install "graphifyy[sql]" (#1745)
+[graphify extract] incremental scan of /Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower
+[graphify extract] re-queuing 5 manifest-stamped code file(s) with no nodes in graph.json (prior failed extraction, #2543)
+[graphify extract] --code-only: skipping 34 non-code file(s) (29 docs, 0 papers, 5 images) — no LLM extraction
+[graphify extract] 13 code, 0 docs, 0 papers, 0 images changed; 55 unchanged; 0 deleted
+[graphify extract] 6 file(s) not classified (no supported extension or shebang), skipped: .gitignore, .graphifyignore, .node-version, favicon.ico, globals.css
+[graphify extract] AST extraction on 13 code files...
+[graphify extract] wrote /Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/graphify-out/graph.json — 346 nodes, 398 edges (no clustering)

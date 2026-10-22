@@ -1,0 +1,32 @@
+{
+  "name": "@watchtower/database",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "browser": "./dist/browser.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "generate": "drizzle-kit generate",
+    "migrate": "node --env-file=../../.env --import tsx src/migrate-cli.ts",
+    "test:integration": "node --env-file=../../.env ../../node_modules/vitest/vitest.mjs run --config vitest.integration.config.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "node --env-file=../../.env --import tsx src/migrate-cli.ts",
+    "db:usage": "node --env-file=../../.env --import tsx src/usage-cli.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "0.45.4",
+    "pg": "8.23.1",
+    "@watchtower/runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/pg": "8.23.1",
+    "drizzle-kit": "0.31.11"
+  }
+}

@@ -1,0 +1,3 @@
+event: message
+data: {"result":{"content":[{"type":"text","text":"{\n  \"appRouter\": [\n    \"/\",\n    \"/favicon.ico\"\n  ]\n}"}]},"jsonrpc":"2.0","id":3}
+
