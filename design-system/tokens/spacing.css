@@ -1,0 +1,41 @@
+:root{
+--space-xxs:4px;
+--space-xs:8px;
+--space-sm:12px;
+--space-md:16px;
+--space-lg:24px;
+--space-xl:32px;
+--space-xxl:48px;
+--space-band:64px;
+--space-section:96px;
+--container-max:1280px;
+--nav-height:64px;
+--control-height:40px;
+--icon-button-size:36px;
+--sidebar-width:248px;
+/* Semantic spacing */
+--space-card:var(--space-lg);
+--space-card-lg:var(--space-xl);
+--space-grid:var(--space-md);
+--space-stack-xs:4px;
+--space-stack-sm:8px;
+--space-stack-md:12px;
+--space-stack-lg:16px;
+--space-stack-xl:24px;
+--space-inline-sm:8px;
+--space-inline-md:12px;
+--space-page-x:20px;
+--space-page-y:20px;
+--header-height:64px;
+--sidebar-width-collapsed:76px;
+/* Touch targets: --touch-min is 0 for fine pointers, 44px for coarse */
+--touch-min:0px;
+--touch-target:44px;
+--icon-button-size:36px;
+}
+@media (pointer:coarse){
+:root{--touch-min:44px;--icon-button-size:44px;--control-height:44px}
+}
+@media (max-width:767px){
+:root{--space-page-x:12px;--space-page-y:12px;--space-section:64px;--space-card:var(--space-md)}
+}

@@ -1,0 +1,19 @@
+<!-- @dsCard group="Components" viewport="700x330" name="Forms" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../vendor/react-18.3.1.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="../../vendor/react-dom-18.3.1.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../../vendor/babel-7.29.0.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.col{display:flex;flex-direction:column;gap:16px}.lbl{font-size:11px;font-family:var(--font-mono);color:var(--text-muted);width:84px;flex:none}</style>
+</head><body class="wt-ambient"><div id="root"></div>
+<script type="text/babel">
+const NS = window.WatchtowerDesignSystem_54a35d;
+const { Input, Select, Tabs, Switch, Checkbox } = NS;
+function Demo(){const [t,setT]=React.useState('all');const [r,setR]=React.useState('24h');return <div className="col">
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}><Input label="URL" mono placeholder="https://api.acme.dev/health" /><Input label="Timeout" defaultValue="5000" suffix="ms" hint="Fail the check after this long" /></div>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}><Input icon="search" placeholder="Search monitors" kbd="⌘K" /><Input defaultValue="api.acme" error="Enter a full URL with https://" /></div>
+<div className="row"><Tabs value={t} onChange={setT} items={[{value:'all',label:'All',count:24},{value:'up',label:'Up',count:21},{value:'down',label:'Down',count:1}]} /><Select icon="calendar" size="sm" value={r} onChange={setR} options={[{value:'1h',label:'Last hour'},{value:'24h',label:'Last 24 hours'},{value:'7d',label:'Last 7 days'}]} /></div>
+<div className="row" style={{gap:28}}><Switch defaultChecked label="Email alerts" /><Switch label="SMS" /><Checkbox defaultChecked label="Frankfurt" /><Checkbox label="Singapore" /></div>
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

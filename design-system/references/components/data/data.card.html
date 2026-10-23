@@ -1,0 +1,29 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Data" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../vendor/react-18.3.1.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="../../vendor/react-dom-18.3.1.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../../vendor/babel-7.29.0.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.col{display:flex;flex-direction:column;gap:16px}.lbl{font-size:11px;font-family:var(--font-mono);color:var(--text-muted);width:84px;flex:none}</style>
+</head><body class="wt-ambient"><div id="root"></div>
+<script type="text/babel">
+const NS = window.WatchtowerDesignSystem_54a35d;
+const { Card, StatCard, StatCallout, SegmentGauge, UptimeBar, LineChart, DonutChart, DataTable, CodeWindow, StatusDot, Badge, Select } = NS;
+const days=Array.from({length:60},(_,i)=>i===41?'down':i===22||i===50?'degraded':'up');
+function Demo(){return <div className="col">
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:12}}>
+<StatCard featured highlight icon="activity" label="Uptime" value="99.98" unit="%" delta="0.02%" caption="vs last 30d" />
+<StatCard icon="timer" label="p95" value="142" unit="ms" delta="8%" deltaTone="down" caption="vs yesterday" />
+<Card variant="yellow" tilt title="Team plan" eyebrow="Upgrade"><span style={{fontSize:13}}>Unlimited monitors, 30s checks.</span></Card>
+</div>
+<Card title="api.acme.dev" icon="globe" action={<Badge tone="up" dot>Operational</Badge>}><UptimeBar days={days} uptime="99.94%" height={28} /></Card>
+<div style={{display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:12}}>
+<Card title="Response time" action={<Select size="sm" options={['24 hours','7 days']} />}><LineChart height={150} highlight={4} labels={['00','04','08','12','16','20','24']} format={v=>v+'ms'} series={[{name:'p95',data:[140,152,138,190,226,146,142],color:'var(--on-dark)',area:true},{data:[150,148,145,160,150,149,151],dashed:true,color:'var(--text-muted)'}]} /></Card>
+<Card title="Monitors"><DonutChart size={130} thickness={14} value="24" label="total" segments={[{label:'Up',value:21,color:'var(--status-up)'},{label:'Degraded',value:2,color:'var(--status-degraded)'},{label:'Down',value:1,color:'var(--status-down)'}]} /></Card>
+</div>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:24,alignItems:'end'}}><div><SegmentGauge value={63} height={40} /><div style={{marginTop:12}}><StatCallout size="md" value="63%" label="of monthly check quota used" /></div></div>
+<CodeWindow title="GET /v1/monitors" status="200 OK · 142ms" code={"curl https://api.watchtower.dev/v1/monitors \\\n  -H 'Authorization: Bearer wt_live_…'"} /></div>
+<Card padding="md"><DataTable dense columns={[{key:'name',label:'Monitor',render:(v,r)=><span style={{display:'inline-flex',alignItems:'center',gap:10}}><StatusDot status={r.status}/>{v}</span>},{key:'region',label:'Regions',muted:true},{key:'p95',label:'p95',align:'right',mono:true},{key:'status',label:'Status',render:s=><Badge tone={s} dot>{s==='up'?'Up':s==='down'?'Down':'Degraded'}</Badge>}]} rows={[{id:1,name:'api.acme.dev',region:'5 regions',p95:'142ms',status:'up'},{id:2,name:'checkout.acme.dev',region:'3 regions',p95:'1,204ms',status:'degraded'},{id:3,name:'db-backup cron',region:'Heartbeat',p95:'—',status:'down'}]} /></Card>
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

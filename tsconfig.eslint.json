@@ -1,10 +1,38 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "ESNext", "moduleResolution": "Bundler", "jsx": "react-jsx", "noEmit": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "paths": { "@/*": ["./apps/web/src/*"] }
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "paths": {
+      "@/*": [
+        "./apps/web/src/*"
+      ],
+      "@design-system": [
+        "./design-system/index.ts"
+      ],
+      "@design-system/*": [
+        "./design-system/*"
+      ]
+    }
   },
-  "include": ["apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts"],
-  "exclude": ["**/node_modules/**", "**/dist/**", "**/.next/**"]
+  "include": [
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "packages/**/*.ts",
+    "design-system/**/*.ts",
+    "design-system/**/*.tsx"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.next/**",
+    "design-system/references/**"
+  ]
 }

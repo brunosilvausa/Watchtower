@@ -1,0 +1,21 @@
+/* Chart language: monochrome by default, neon for the selected/primary series, status colours only for status. */
+:root{
+--chart-series-primary:var(--primary);
+--chart-series-1:var(--wt-ink-100);
+--chart-series-2:#7E8893;
+--chart-series-3:var(--wt-ink-500);
+--chart-series-muted:rgba(149,159,170,.4);
+--chart-grid:rgba(255,255,255,.055);
+--chart-zero:rgba(255,255,255,.24);
+--chart-axis:var(--text-tertiary);
+--chart-crosshair:var(--border-strong);
+--chart-band:rgba(255,255,255,.035);
+--chart-area-opacity:.16; /* @kind other */
+--chart-highlight:var(--primary);
+--chart-bar:rgba(221,227,232,.82);
+--chart-positive:var(--status-up);
+--chart-negative:var(--status-down);
+--chart-missing:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 3px,rgba(255,255,255,0) 3px 7px); /* @kind other */
+--skeleton-base:rgba(255,255,255,.06);
+--skeleton-strong:rgba(255,255,255,.09);
+}

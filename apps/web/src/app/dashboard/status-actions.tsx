@@ -1,0 +1,11 @@
+"use client";
+import { useState } from "react";
+import { Button, Dialog, Input } from "@design-system";
+import { productRequest, workspacePath, type ProductRow } from "@/lib/product-client";
+import type { Translate } from "./product-shell";
+import styles from "./product.module.css";
+export function StatusActions({ row, workspaceId, t }: { row: ProductRow; workspaceId: string; t: Translate }) {
+  const [open, setOpen] = useState(false); const [message, setMessage] = useState(""); const [error, setError] = useState(""); const [busy, setBusy] = useState(false);
+  async function act(path: string, body: unknown) { setBusy(true); setError(""); try { const result = await productRequest(workspacePath(workspaceId, path), "POST", body); setMessage(JSON.stringify(result, null, 2)); } catch (cause) { setError(cause instanceof Error ? cause.message : "Request failed"); } finally { setBusy(false); } }
+  return <><Button size="sm" variant="secondary" onClick={() => setOpen(true)}>{t("Atualizações e domínio", "Updates and domain")}</Button><Dialog open={open} onClose={() => setOpen(false)} title={String(row.name)}><div className={styles.stack}>{error && <p role="alert" className="ds-error">{error}</p>}{message && <pre role="status" className={styles.secret}>{message}</pre>}<form className={styles.form} onSubmit={event => { event.preventDefault(); const form = new FormData(event.currentTarget); void act("status-updates", { pageId: row.id, title: String(form.get("title")), body: String(form.get("body")) }); }}><Input label={t("Título da atualização", "Update title")} name="title" required maxLength={200} /><label>{t("Mensagem pública", "Public message")}<textarea className="ds-input" name="body" required maxLength={10000} /></label><Button type="submit" loading={busy}>{t("Publicar atualização", "Publish update")}</Button></form><p>{t("Configure o domínio no editor antes de verificar o TXT.", "Configure the domain in the editor before verifying its TXT record.")}</p><Button variant="secondary" disabled={busy} onClick={() => { void act("status-domain", { pageId: row.id, action: "challenge" }); }}>{t("Gerar registro DNS", "Generate DNS record")}</Button><Button variant="secondary" disabled={busy} onClick={() => { void act("status-domain", { pageId: row.id, action: "verify" }); }}>{t("Verificar DNS", "Verify DNS")}</Button></div></Dialog></>;
+}

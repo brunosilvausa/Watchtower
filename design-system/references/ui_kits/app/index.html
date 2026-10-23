@@ -1,0 +1,76 @@
+<!-- @dsCard group="App UI kit" viewport="1440x900" name="Watchtower app" subtitle="Overview, monitors, monitor detail, incidents, settings" -->
+<!doctype html><html><head><meta charset="utf-8"><title>Watchtower — App</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="../../vendor/react-18.3.1.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="../../vendor/react-dom-18.3.1.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../../vendor/babel-7.29.0.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="data.js"></script>
+<style>
+body{overflow:hidden}
+.ov-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-grid);grid-template-areas:"kpis kpis mon resp" "checks checks mix alerts" "inc inc inc reg"}
+.ov-kpis{grid-area:kpis;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-grid)}
+.ov-kpis>:first-child{grid-row:span 3}
+.ov-monitors{grid-area:mon}.ov-response{grid-area:resp}.ov-checks{grid-area:checks}.ov-mix{grid-area:mix}.ov-alerts{grid-area:alerts}.ov-incidents{grid-area:inc}.ov-regions{grid-area:reg}
+@media (max-width:1439px){.ov-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"kpis kpis" "mon resp" "checks checks" "mix alerts" "inc inc" "reg reg"}}
+@media (max-width:767px){.ov-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"kpis" "resp" "mon" "checks" "mix" "alerts" "inc" "reg"}.ov-kpis{grid-template-columns:1fr}.ov-kpis>:first-child{grid-row:auto}}
+@media (min-width:768px) and (max-width:1439px){.ov-kpis{grid-template-columns:1.2fr 1fr 1fr}.ov-kpis>:first-child{grid-row:span 2}}
+</style>
+</head><body><a class="wt-skip-link" href="#main">Skip to content</a><div id="root"></div>
+<script type="text/babel" src="Shell.jsx"></script>
+<script type="text/babel" src="OverviewScreen.jsx"></script>
+<script type="text/babel" src="MonitorsScreen.jsx"></script>
+<script type="text/babel" src="MonitorDetailScreen.jsx"></script>
+<script type="text/babel" src="IncidentsScreen.jsx"></script>
+<script type="text/babel" src="SettingsScreen.jsx"></script>
+<script type="text/babel">
+function App() {
+  const D = window.WT_DATA;
+  const [view, setView] = React.useState('overview');
+  const [ws, setWs] = React.useState(D.workspaces[0]);
+  const [mon, setMon] = React.useState(null);
+  const [monitors, setMonitors] = React.useState(D.monitors);
+  const [add, setAdd] = React.useState(false);
+  const [url, setUrl] = React.useState('');
+  const [toast, setToast] = React.useState(null);
+  const [cmd, setCmd] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  React.useEffect(() => { const k = e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setCmd(c => !c); } }; window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k); }, []);
+  const switchWs = w => { setWs(w); setLoading(true); setTimeout(() => setLoading(false), 900); show('Switched to ' + w.name, 'neutral'); };
+  const commands = [
+    ...[['overview', 'Overview', 'layout-dashboard'], ['monitors', 'Monitors', 'activity'], ['incidents', 'Incidents', 'siren'], ['status', 'Status pages', 'radio-tower'], ['alerts', 'Alert channels', 'bell-ring'], ['settings', 'Members & settings', 'users']]
+      .map(([id, label, icon]) => ({ id: 'p-' + id, group: 'Pages', label, icon, onSelect: () => setView(id) })),
+    ...monitors.map(m => ({ id: 'm-' + m.id, group: 'Monitors', label: m.name, icon: 'globe', hint: m.type, keywords: m.url, onSelect: () => open(m) })),
+    { id: 'a-add', group: 'Actions', label: 'Add monitor', icon: 'plus', onSelect: () => setAdd(true) },
+    ...D.workspaces.filter(w => w.id !== ws.id).map(w => ({ id: 'w-' + w.id, group: 'Actions', label: 'Switch to ' + w.name, icon: 'repeat', onSelect: () => switchWs(w) })),
+  ];
+  const show = (title, tone) => { setToast({ title, tone }); clearTimeout(window.__t); window.__t = setTimeout(() => setToast(null), 3200); };
+  const open = m => { setMon(m); setView('detail'); };
+  const create = () => {
+    const host = url.replace(/^https?:\/\//, '').split('/')[0] || 'new-monitor';
+    setMonitors([{ id: 'n' + Date.now(), name: host, url: url || 'https://' + host, type: 'HTTPS', interval: '30s', regions: 5, p95: 120, uptime: '100%', status: 'up', days: Array(29).fill('none').concat('up') }, ...monitors]);
+    setAdd(false); setUrl(''); setView('monitors'); show(host + ' is being checked from 5 regions', 'up');
+  };
+  let screen;
+  if (view === 'overview') screen = <OverviewScreen openMonitor={open} setView={setView} loading={loading} />;
+  else if (view === 'monitors') screen = <MonitorsScreen openMonitor={open} monitors={monitors} loading={loading} onAdd={() => setAdd(true)} />;
+  else if (view === 'detail' && mon) screen = <MonitorDetailScreen key={mon.id} monitor={mon} back={() => setView('monitors')} onToast={show} />;
+  else if (view === 'incidents') screen = <IncidentsScreen />;
+  else if (view === 'settings' || view === 'alerts') screen = <SettingsScreen workspace={ws} onToast={show} />;
+  else screen = <><PageHeader title="Status pages" /><WT.Card><WT.StateMessage kind="unavailable" title="Status pages aren’t part of this kit" description="No reference design was provided for status pages, so this screen is intentionally left empty." /></WT.Card></>;
+  return <>
+    {WT.AmbientBackdrop && <WT.AmbientBackdrop />}
+    <AppShell view={view} setView={setView} workspace={ws} setWorkspace={switchWs} onAdd={() => setAdd(true)} onCommand={() => setCmd(true)} monitor={mon}>{screen}</AppShell>
+    {WT.CommandPalette && <WT.CommandPalette open={cmd} onClose={() => setCmd(false)} items={commands} />}
+    <WT.Dialog open={add} onClose={() => setAdd(false)} title="Add monitor" description="Watchtower will request this URL every 30 seconds from 5 regions."
+      actions={<><WT.Button variant="ghost" onClick={() => setAdd(false)}>Cancel</WT.Button><WT.Button onClick={create}>Create monitor</WT.Button></>}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <WT.Input label="URL" required mono placeholder="https://api.example.com/health" hint="Full URL including https://" value={url} onChange={e => setUrl(e.target.value)} autoFocus />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12 }}><WT.Input label="Timeout" defaultValue="5000" suffix="ms" /><WT.Input label="Expected status" defaultValue="200" mono /></div>
+      </div>
+    </WT.Dialog>
+    {toast && <div style={{ position: 'fixed', right: 'var(--space-page-x)', left: 'auto', bottom: 'var(--space-page-y)', zIndex: 'var(--layer-toast)', maxWidth: 'calc(100vw - 24px)' }}><WT.Toast tone={toast.tone} title={toast.title} onClose={() => setToast(null)} /></div>}
+  </>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script></body></html>

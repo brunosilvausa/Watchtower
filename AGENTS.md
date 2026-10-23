@@ -2,7 +2,7 @@
 
 ## Scope and source of truth
 
-Read `docs/superpowers/specs/2026-10-21-watchtower-private-beta-design.md` first for architecture. Then read `docs/architecture.md` for actual code and `docs/setup.md` for dated evidence. M1 only is authorized. Do not implement M2–M6, deploy, send emails, purchase services or mutate remote systems without explicit authorization. Installing tools is not publication permission.
+Read `docs/superpowers/specs/2026-10-21-watchtower-private-beta-design.md` first for architecture. Then read `docs/architecture.md` for actual code and `docs/setup.md` for dated evidence. The user authorized the full reference product on 2026-10-22; read `docs/superpowers/specs/2026-10-22-full-product-design.md` and its implementation plan for the expanded local scope. Do not deploy, send real emails, purchase services or mutate remote systems without explicit authorization. Installing tools is not publication permission.
 
 ## Environment preferences
 
@@ -34,3 +34,7 @@ Use Superpowers proportionally; existing explicit execution authority overrides 
 Portable context is this index into canonical docs, not copied personal memory. Re-read current code/checks after resumption. Evidence is dated in `docs/setup.md`; invalidate relevant results after dependency, schema, config, host or instruction changes. Never promote local tests into hosted, security or commercial proof.
 
 Project skills are under `.agents/skills`; installation is not client execution. `find-skills` is reused globally. `next-dev-loop` is unavailable until its required agent-browser exists; Playwright evidence is reported separately. Deployment skills are inactive for M1.
+
+## Design system
+
+Read root `DESIGN.md` before UI changes. Reuse named components from `@design-system` and canonical semantic tokens in `design-system/tokens`; preserve Neon Spatial Glass, accessibility, reduced motion and material rules. Avoid duplicate components and hardcoded visual values. `design-system/references` is archival only, never application imports or public assets. The `/design-system` showcase is development-only; do not expose it in production. The original local visual integration was M1; full product implementation is now separately authorized by the 2026-10-22 full-product design.

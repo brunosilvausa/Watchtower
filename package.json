@@ -26,7 +26,12 @@
     "db:migrate": "pnpm --filter @watchtower/database db:migrate",
     "test:db": "pnpm --filter @watchtower/database test:integration",
     "db:usage": "pnpm --filter @watchtower/database db:usage",
-    "check": "pnpm lint && pnpm typecheck && pnpm lint:typed && pnpm lint:rules && pnpm test && pnpm build && pnpm test:worker"
+    "check": "pnpm lint && pnpm typecheck && pnpm lint:typed && pnpm lint:rules && pnpm test && pnpm build && pnpm test:worker",
+    "test:design-system": "playwright test --config playwright.design-system.config.ts",
+    "setup:product": "node scripts/setup-product-local.mjs",
+    "dev:product": "pnpm build:packages && node scripts/product-dev.mjs",
+    "dev:monitoring": "pnpm build:packages && node scripts/product-dev.mjs --worker",
+    "test:product": "playwright test --config playwright.product.config.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

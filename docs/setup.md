@@ -1,3 +1,13 @@
+# Current full-product setup — 2026-10-22
+
+The full reference product is now authorized and implemented locally. Earlier M1/visual/landing entries below are historical snapshots, not current scope restrictions. Use the [full-product plan](superpowers/plans/2026-10-22-full-product.md), [current architecture](architecture.md), and [execution ledger](evidence/full-product/progress.md).
+
+Local startup: `pnpm setup:product`, `pnpm db:up`, `pnpm db:migrate`, then `pnpm dev:product`; run `pnpm dev:monitoring` separately to enable actual checks. Configuration files and local mail are private and ignored by Git. Existing files, database volume and unrelated services were preserved. No deployment, push, external message or payment was performed.
+
+Current results:115unit tests,58PostgreSQL tests,8product browser cases,10landing cases,3design-system cases and2setup checks passed. Five independent review cycles completed and17material findings were corrected. Evidence: [validation](evidence/full-product/validation.md) and [reviews](evidence/full-product/reviews.md). Provider adapters and security controls have local tests; actual provider credentials, hosted egress, enterprise SSO/SCIM and passkey hardware require operational validation. Previous vulnerability-audit results below are historical unless explicitly refreshed in the current evidence.
+
+---
+
 # M1 setup evidence
 
 Date: 2026-10-21 (America/New_York). Scope: local M1 only. Canonical approval and additional gates are in [the architecture](superpowers/specs/2026-10-21-watchtower-private-beta-design.md).
@@ -74,3 +84,54 @@ Initial audit attempts were slow; a bounded retry timed out, then the final audi
 Typed lint measured 3.25 seconds wall time in the initial full profile; timing is machine-specific. `pnpm install --frozen-lockfile` passed after the security override. Runtime MCP tools/list, get_compilation_issues (empty issue list) and get_routes were checked on a dedicated loopback Next dev server. This is partial framework runtime evidence, not a successful next-dev-loop skill run because agent-browser remains unavailable. Next analyzer command support was checked, but no bundle optimization was performed.
 
 Final cleanup: dedicated Next dev/test processes stopped; Watchtower PostgreSQL container stopped with exit 0 and named volume preserved. Other projects were not stopped. Browser logs include only a Node NO_COLOR/FORCE_COLOR warning from the test harness, not an application runtime failure.
+
+## Design system integration — 2026-10-22
+
+Scope: local M1 visual foundation, autonomous user-requested export integration plus homepage identity. Skills: AIOX UX/development guidance, Superpowers brainstorming/planning/native execution/independent review/verification, Ponytail full and concise Portuguese communication. No commits, pushes, deployment, database operation, email or remote-system mutation.
+
+The source export contained 181 files and 36 component purposes. All are represented in `design-system`: 169 files preserved byte-identically and 12 intentionally adapted for local paths, fonts, icon loading and the border-token collision. Original hashes and mapping are in `design-system/provenance.json` and `preservation-check.json`. `design-system-export` was removed only after validation. Root DESIGN.md is the visual contract; references retain historical kits and original APIs separately from the typed application components.
+
+Versions remain Next 16.4.2, React 19.3.0, TypeScript 5.9.3, Tailwind 4.3.3. A private source workspace package reuses React/types at the same versions; no new third-party runtime library or stack upgrade. Local asset packages: Fontsource Inter/JetBrains Mono 5.3.0 and Lucide static 0.460.0, with licenses/provenance. Reference-only React18.3.1 and Babel7.29.0 preserve standalone HTML without joining the app bundle.
+
+Context7 resolve/query was used for Tailwind v4 source registration and theme integration; installed Next16.4.2 docs supplied CSS, server/client and notFound behavior. An offline pnpm install lacked cached registry metadata; the regular pinned install succeeded, followed by successful `pnpm install --frozen-lockfile`.
+
+| Check | Result |
+|---|---|
+| `pnpm check` | PASS: lint, TypeScript, typed lint, custom-rule checks, 25 unit tests, package/worker/Next build and worker smoke |
+| `pnpm test:browser` | PASS: 4 desktop/mobile cases; homepage content/no signup/no errors/no horizontal overflow; showcase and raw reference paths return 404 in production |
+| `pnpm test:design-system` | PASS: desktop/tablet/mobile interactive showcase; local assets, font availability, tokens, blur, buttons, links, forms, tabs, dialog focus/restore, commands, data selection, chart missing samples, tooltip hover travel, explicit and OS reduced motion |
+| `node scripts/verify-design-references.mjs` | PASS: 84 local links, local font files, no unsafe SVG injection/application dependence on the removed export |
+| Historical HTML browser check | PASS: 30 pages, no page errors, failed resources or external requests |
+| Reduced transparency | PASS under Chromium CDP media emulation: frosted filter none, solid rgb(23, 28, 34) |
+| Visual inspection | Actual screenshots inspected for desktop/mobile homepage and showcase; material grid preserves frosted, smoked, liquid, metal and neon distinctions |
+| Independent review | Completed in fresh native context; missing numeric data and tooltip hover findings fixed with regressions |
+| Final cleanup | Export removed; dedicated local servers stopped; existing sessions/other projects preserved |
+
+Evidence: `docs/evidence/design-system/` contains command outputs, reference checks, review notes and screenshots. Some intermediate browser runs failed on bugs subsequently fixed (dialog focus boundary, switch pointer layer, tooltip diagonal travel). One pair of runs collided in shared Playwright artifacts; configurations now use separate result directories. One dev-server cold-start attempt timed out; a later owned-server run succeeded. Reduced-motion CSS is optimized to an identity matrix rather than literal `none`; the test checks the resulting lack of transformation. These failed attempts are not reported as PASS.
+
+Limitations: no real-device frame-rate measurement, screen-reader certification, full contrast audit or hosted validation. Historical reference kits retain their original illustrative behavior and unapproved commercial claims. The exported arbitrary styling/helper APIs are not guaranteed; the smaller typed API and canonical tokens are documented. Database tests and vulnerability audit were not repeated because schema/backend/dependency versions were unchanged. The previous dependency advisory record is historical, not refreshed by this task.
+
+## Landing page implementation — 2026-10-22
+
+User approved reproducing the Claude artifact locally with demonstrative interactions and private-beta CTAs. The homepage now uses Portuguese copy, a CSS lighthouse, local preview fields, an incident sequence, feature cards, a synthetic history slider, onboarding explanation, native FAQ and beta notice. Source is a Next Server Component with small client islands and scoped CSS Modules. No dependency added; no signup/auth route, request to a user-entered URL, storage, database change, email, commit, push or deploy.
+
+Context7 resolve/query and installed Next 16.4.2 docs were consulted for Server/Client composition and CSS Modules. The existing Tailwind loader's broad CSS rule produced 13 warnings with module syntax; narrowing it to globals.css leaves CSS Modules to Next. Final build has no CSS warnings. The shared Tabs API gained an optional orientation; existing horizontal callers retain their behavior.
+
+Validation after final implementation:
+- `pnpm check`: PASS (lint, types, typed lint, custom lint-rule checks, 25 unit tests, all builds and worker smoke).
+- `pnpm test:browser`: PASS, 10 cases across desktop/mobile, with extra 768px and 320px viewport checks. Validates local-only preview, no storage/outbound request, beta anchors, vertical keyboard tabs, history range, FAQ, pause/autoplay/reduced motion, no root overflow, and production exclusion of showcase/references.
+- `pnpm test:design-system`: PASS, 3 desktop/tablet/mobile cases after the shared Tabs and loader changes, including existing horizontal tab behavior and interactive states.
+- `git diff --check`: PASS.
+- Fresh independent static review: one keyboard orientation finding, fixed with an observed failing regression before implementation; no other material finding. Actual desktop/mobile hero, full-page and incident screenshots inspected.
+
+Evidence: `docs/evidence/landing/` holds final check/browser/showcase logs, initial expected-red tests, review and screenshots. Browser harness emits the existing NO_COLOR/FORCE_COLOR warning; no application page errors were observed. Dedicated test servers stopped after the suites.
+
+Limits: responsive Chromium emulation is not physical-device or screen-reader certification. No full WCAG audit, hosted performance, live monitoring, auth or deployment validation. Earlier dependency advisory evidence was not refreshed; no dependency versions changed. The reference's public signup/free-plan/live-check claims were intentionally replaced by the approved private-beta/demo copy.
+
+### HTML-source fidelity refinement — 2026-10-22
+
+The user provided the original bundled HTML and repeated the landing request. Read its JSON template as inert data. Ported source lighthouse SVG and ring/sweep geometry, brand glyph, sticky header, headline/timestamp proportions and structured incident tab labels. Existing beta/demo scope remains unchanged. No bundled script, iframe or second runtime was imported. Source hash and review notes: `docs/evidence/landing/html-source.md`.
+
+Fresh final validation: `pnpm check` PASS (25 unit tests, lint/types/build/worker); `pnpm test:browser` PASS (10 cases, including actual animation pause/reduced-motion checks and internal tab/panel bounds at 320/700/768px); `git diff --check` PASS. Desktop hero and incident screenshots inspected. Independent review's suspected tablet overflow did not reproduce with added internal-width checks; no speculative layout change was made.
+
+Fresh showcase retry was blocked by the user's existing Next development server on port 3000, which was preserved. The earlier three showcase passes predate the ReactNode label refinement and are not presented as current rerun evidence. The refinement changes label typing without altering shared tab behavior; production tests cover the new labels. No deploy, live monitoring, physical-device test or screen-reader certification.

@@ -4,10 +4,10 @@ import base from "./eslint-rules/next-base.mjs";
 
 export default defineConfig([
   ...base,
-  globalIgnores(["**/.next/**", "**/dist/**", "**/next-env.d.ts", ".vitest/**", "test-results/**", "playwright-report/**"]),
+  globalIgnores(["**/.next/**", "**/dist/**", "**/next-env.d.ts", ".vitest/**", "test-results/**", "playwright-report/**", "design-system/references/**"]),
   { settings: { next: { rootDir: "apps/web/" } } },
   {
-    files: ["apps/**/*.{ts,tsx}", "packages/**/*.ts"],
+    files: ["apps/**/*.{ts,tsx}", "packages/**/*.ts", "design-system/**/*.{ts,tsx}"],
     plugins: { drizzle },
     rules: {
       "quality/no-direct-console": ["error", { logger: "the redacted server logger" }],
@@ -20,7 +20,7 @@ export default defineConfig([
     },
   },
   {
-    files: ["apps/web/src/components/**/*.{ts,tsx}"],
+    files: ["apps/web/src/components/**/*.{ts,tsx}", "design-system/**/*.{ts,tsx}"],
     rules: { "no-restricted-imports": ["error", { patterns: ["@watchtower/database", "@watchtower/runtime"] }] },
   },
 ]);

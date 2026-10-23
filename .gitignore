@@ -15,3 +15,6 @@ graphify-out/
 docs/private/
 *.log
 .vitest/
+
+# Local product email spool and secret-bearing development artifacts
+.local/

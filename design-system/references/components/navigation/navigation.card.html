@@ -1,0 +1,19 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Navigation" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../vendor/react-18.3.1.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="../../vendor/react-dom-18.3.1.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../../vendor/babel-7.29.0.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.col{display:flex;flex-direction:column;gap:16px}.lbl{font-size:11px;font-family:var(--font-mono);color:var(--text-muted);width:84px;flex:none}</style>
+</head><body class="wt-ambient"><div id="root"></div>
+<script type="text/babel">
+const NS = window.WatchtowerDesignSystem_54a35d;
+const { Sidebar, AppTopBar, TopNav, IconButton, Button, Wordmark } = NS;
+function Demo(){const [a,setA]=React.useState('overview');return <div className="col">
+<TopNav active="Pricing" style={{position:'relative',borderRadius:12,border:'1px solid var(--hairline)'}} />
+<div style={{display:'flex',gap:16,height:300}}>
+<Sidebar active={a} onSelect={setA} workspace={{name:'Acme Ops',plan:'Team plan'}} sections={[{items:[{id:'overview',label:'Overview',icon:'layout-dashboard'},{id:'monitors',label:'Monitors',icon:'activity',badge:24},{id:'incidents',label:'Incidents',icon:'siren',badge:1,badgeTone:'down'}]}]} />
+<div style={{flex:1,minWidth:0}}><AppTopBar actions={<><IconButton icon="bell" label="Alerts" dot /></>} /><div style={{marginTop:24,display:'flex',gap:16,alignItems:'center'}}><Wordmark size={28} /><Wordmark size={18} color="var(--text-muted)" /></div></div>
+</div></div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

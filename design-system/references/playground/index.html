@@ -1,0 +1,162 @@
+<!doctype html>
+<!-- DEV ONLY — Visual Foundation Playground. Intentionally NOT tagged @dsCard / @startingPoint so it never ships in consumer navigation. -->
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Watchtower · Neon Spatial Glass Showcase</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../vendor/react-18.3.1.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="../vendor/react-dom-18.3.1.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../vendor/babel-7.29.0.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../_ds_bundle.js"></script>
+<style>
+body{margin:0}
+.pg{max-width:1280px;margin:0 auto;padding:32px 24px 96px;display:flex;flex-direction:column;gap:56px}
+.pg h2{margin:0 0 6px;font:var(--type-section-heading);letter-spacing:var(--type-section-heading-ls);color:var(--text-primary)}
+.pg .sub{margin:0 0 20px;font:var(--type-body-sm);color:var(--text-tertiary)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(var(--min,180px),1fr))}
+.tile{border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;min-height:150px;justify-content:flex-end}
+.k{font:var(--type-mono);font-size:11px;color:var(--text-tertiary)}
+.blobs{position:relative;padding:28px;border-radius:16px;overflow:hidden;border:1px solid var(--border-subtle)}
+.blobs::before,.blobs::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.blobs::before{width:260px;height:260px;left:6%;top:-40px;background:var(--primary);opacity:.55}
+.blobs::after{width:220px;height:220px;right:10%;bottom:-60px;background:#7fa6ff;opacity:.4}
+.blobs>*{position:relative}
+.sw{height:56px;border-radius:8px;border:1px solid var(--border-subtle)}
+table.c{width:100%;border-collapse:collapse;font:var(--type-body-sm)}
+table.c th,table.c td{padding:8px 10px;border-bottom:1px solid var(--border-subtle);text-align:left;white-space:nowrap}
+table.c th{font:var(--type-label);color:var(--text-tertiary)}
+.bar{position:sticky;top:0;z-index:60;display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding:12px 24px}
+/* Simulated fallback: no backdrop-filter → solid materials */
+.pg-fallback{--glass-frosted-bg:var(--surface-primary);--glass-smoked-bg:var(--background-elevated);--glass-overlay-bg:var(--surface-primary);--glass-liquid-bg:var(--surface-secondary)}
+.pg-fallback *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+</style></head><body><div id="root"></div>
+<script type="text/babel" src="spatial.jsx"></script>
+<script type="text/babel" src="showcase.jsx"></script>
+<script type="text/babel">
+const WT = window.WatchtowerDesignSystem_54a35d || {};
+const { Button, IconButton, Input, Select, Tabs, Switch, Checkbox, Badge, StatusDot, Card, StatCard, Toast, Wordmark } = WT;
+
+function hexToRgb(s){s=s.trim();let m;
+  if((m=s.match(/^#([0-9a-f]{6})$/i)))return[parseInt(m[1].slice(0,2),16),parseInt(m[1].slice(2,4),16),parseInt(m[1].slice(4),16),1];
+  if((m=s.match(/rgba?\(([^)]+)\)/i))){const p=m[1].split(',').map(x=>parseFloat(x));return[p[0],p[1],p[2],p[3]??1];}
+  return null;}
+const tok=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const over=(fg,bg)=>[0,1,2].map(i=>fg[i]*fg[3]+bg[i]*(1-fg[3])).concat(1);
+const lum=c=>{const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)};return .2126*f(c[0])+.7152*f(c[1])+.0722*f(c[2]);};
+const ratio=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+
+function Section({title,sub,children}){const id=title.toLowerCase().replace(/&/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');return <section id={id} style={{scrollMarginTop:72}}><h2>{title}</h2>{sub&&<p className="sub">{sub}</p>}{children}</section>;}
+function Swatch({v,label}){return <div style={{display:'flex',flexDirection:'column',gap:4}}><div className="sw" style={{background:`var(${v})`}}></div><span style={{...window.WatchtowerDesignSystem_54a35d.Typography.style('label'),color:'var(--text-primary)'}}>{label}</span><span className="k">{v} · {tok(v)}</span></div>;}
+function Sample({dark=true}){return <>
+  <span className="wt-eyebrow" style={{color:dark?undefined:'rgba(16,18,0,.66)'}}>p95 latency</span>
+  <span className="wt-value-lg" style={{color:dark?undefined:'var(--primary-foreground)'}}>142ms</span>
+  <span style={{...window.WatchtowerDesignSystem_54a35d.Typography.style('body-sm'),color:dark?'var(--text-secondary)':'rgba(16,18,0,.8)'}}>Checked from 5 regions every 30 seconds.</span></>;}
+
+function Contrast(){
+  const [rows,setRows]=React.useState([]);
+  React.useEffect(()=>{
+    const base=hexToRgb(tok('--background-base'));
+    const surfaces=[['Background base',base],['Surface primary',hexToRgb(tok('--surface-primary'))],['Frosted on base',over(hexToRgb(tok('--glass-frosted-bg')),base)],['Smoked on base',over(hexToRgb(tok('--glass-smoked-bg')),base)],['Overlay on base',over(hexToRgb(tok('--glass-overlay-bg')),base)],['Liquid on base',over(hexToRgb(tok('--glass-liquid-bg')),base)]];
+    const texts=['--text-primary','--text-strong','--text-secondary','--text-tertiary','--primary'];
+    setRows(surfaces.map(([n,bg])=>({n,cells:texts.map(t=>ratio(hexToRgb(tok(t)),bg))})));
+  },[]);
+  const heads=['primary','strong','secondary','tertiary','neon'];
+  return <div className="wt-mat-frosted" style={{borderRadius:12,padding:8,overflowX:'auto'}}><table className="c"><thead><tr><th>Surface (composited on #0B0D10)</th>{heads.map(h=><th key={h}>{h}</th>)}</tr></thead>
+    <tbody>{rows.map(r=><tr key={r.n}><td style={{color:'var(--text-strong)'}}>{r.n}</td>{r.cells.map((c,i)=><td key={i} className="wt-num" style={{color:c>=4.5?'var(--text-primary)':'var(--status-down)'}}>{c.toFixed(2)} {c>=7?'AAA':c>=4.5?'AA':'✕'}</td>)}</tr>)}</tbody></table>
+    <p className="k" style={{padding:'8px 10px',margin:0}}>Computed live from tokens. Ambient light adds ≤ 7% luminance behind glass. Disabled text is exempt and not listed.</p></div>;
+}
+
+function App(){
+  const [bg,setBg]=React.useState('grain');
+  const [fallback,setFallback]=React.useState(false);
+  const [tab,setTab]=React.useState('24h');
+  React.useEffect(()=>{document.body.className=bg==='flat'?'':'wt-ambient';document.body.style.setProperty('--grain-opacity',bg==='grain'?'.035':'0');document.body.style.background=bg==='flat'?'var(--background-base)':'';},[bg]);
+  React.useEffect(()=>{document.documentElement.classList.toggle('pg-fallback',fallback);},[fallback]);
+  if(!Button||!WT.CommandPalette||!WT.BarChart) return <div className="pg"><p style={{color:'var(--text-secondary)'}}>Component bundle not compiled yet — reload in a moment.</p></div>;
+  return <>
+  <div className="bar wt-mat-smoked" style={{borderRadius:0,borderLeft:0,borderRight:0,borderTop:0}}>
+    <Wordmark size={18}/><span className="k">Visual Foundation Playground · dev only</span><span style={{flex:1}}/>
+    <span className="k">Background</span><Tabs size="sm" value={bg} onChange={setBg} items={[{value:'flat',label:'Flat'},{value:'ambient',label:'Atmosphere'},{value:'grain',label:'+ Grain'}]}/>
+    <Switch checked={fallback} onChange={setFallback} label="No backdrop-filter (fallback)"/>
+  </div>
+  <div className="pg">
+    <div><h1 style={{margin:"0 0 6px",...window.WatchtowerDesignSystem_54a35d.Typography.style('page-heading'),letterSpacing:"var(--type-page-heading-ls)",color:"var(--text-primary)"}}>Neon Spatial Glass</h1><p className="sub" style={{margin:"0 0 16px"}}>Design system showcase — every example renders the real components from the bundle. Development only.</p><ShowcaseNav/></div>
+    <Section title="Color" sub="Semantic tokens. Neon is reserved for primary actions, selection, and key metrics.">
+      <div className="grid" style={{'--min':'150px'}}>
+        <Swatch v="--primary" label="Primary"/><Swatch v="--primary-active" label="Primary active"/><Swatch v="--primary-disabled" label="Primary disabled"/><Swatch v="--primary-foreground" label="Primary foreground"/>
+        <Swatch v="--background-base" label="Background base"/><Swatch v="--background-elevated" label="Background elevated"/><Swatch v="--surface-primary" label="Surface primary"/><Swatch v="--surface-secondary" label="Surface secondary"/><Swatch v="--surface-tertiary" label="Surface tertiary"/>
+        <Swatch v="--text-primary" label="Text primary"/><Swatch v="--text-secondary" label="Text secondary"/><Swatch v="--text-tertiary" label="Text tertiary"/><Swatch v="--text-disabled" label="Text disabled"/>
+        <Swatch v="--status-up" label="Up"/><Swatch v="--status-degraded" label="Degraded"/><Swatch v="--status-down" label="Down"/><Swatch v="--status-info" label="Info"/>
+      </div>
+    </Section>
+    <Section title="Materials" sub="Same content on each material, over a high-contrast backdrop so translucency and legibility can be compared.">
+      <div className="blobs"><div className="grid" style={{'--min':'190px'}}>
+        {[['wt-mat-solid','Solid','tables, dense data'],['wt-mat-frosted','A · Frosted','cards, widgets'],['wt-mat-smoked','B · Smoked','sidebar, nav'],['wt-mat-overlay','Overlay','menus, dialogs'],['wt-mat-liquid','C · Liquid','floating controls'],['wt-mat-metal','D · Brushed metal','secondary controls'],['wt-mat-neon','Neon','primary, featured']].map(([c,n,u])=>
+          <div key={c} className={'tile '+c}><span className="k" style={c==='wt-mat-neon'?{color:'rgba(16,18,0,.7)'}:undefined}>{n} · {u}</span><Sample dark={c!=='wt-mat-neon'}/></div>)}
+      </div></div>
+    </Section>
+    <Section title="Ambient lighting" sub="Light enters top-left. Neon reflection only appears around active elements.">
+      <div className="grid" style={{'--min':'220px'}}>
+        <div className="tile" style={{background:'var(--background-base)',border:'1px solid var(--border-subtle)'}}><b style={{color:'var(--text-primary)'}}>No lighting</b><span className="k">flat base</span></div>
+        <div className="tile" style={{background:'var(--atmosphere)',border:'1px solid var(--border-subtle)'}}><b style={{color:'var(--text-primary)'}}>Atmosphere</b><span className="k">--atmosphere</span></div>
+        <div className="tile" style={{background:'var(--background-base)',border:'1px solid var(--border-subtle)',position:'relative',overflow:'hidden'}}><span style={{position:'absolute',inset:'0 0 auto 0',height:110,background:'var(--neon-reflection-under)'}}/><span style={{position:'relative',padding:'10px 12px',borderRadius:8,background:'var(--neon-reflection)',border:'1px solid var(--border-default)',color:'var(--text-primary)',...window.WatchtowerDesignSystem_54a35d.Typography.style('label'),display:'flex',gap:8,alignItems:'center'}}><StatusDot status="up"/>Overview (active)</span><span className="k" style={{position:'relative'}}>--neon-reflection</span></div>
+        <div className="tile wt-mat-frosted"><b style={{color:'var(--text-primary)'}}>Directional surface light</b><span className="k">--light-top-edge + elev edge</span></div>
+      </div>
+    </Section>
+    <Section title="Elevation" sub="Z0–Z4. Each level pairs a material, shadow and edge light. Dense data stays at Z1.">
+      <div className="grid" style={{'--min':'180px',alignItems:'end'}}>
+        <div className="tile" style={{border:'1px dashed var(--border-default)'}}><b style={{color:'var(--text-primary)'}}>Z0</b><span className="k">background · none</span></div>
+        <div className="tile wt-mat-frosted"><b style={{color:'var(--text-primary)'}}>Z1</b><span className="k">frosted · elev-1 · layer 1</span></div>
+        <div className="tile wt-mat-smoked"><b style={{color:'var(--text-primary)'}}>Z2</b><span className="k">smoked · elev-2 · layer 20</span></div>
+        <div className="tile wt-mat-overlay"><b style={{color:'var(--text-primary)'}}>Z3</b><span className="k">overlay · elev-3 · layer 50</span></div>
+        <div className="tile wt-mat-overlay" style={{boxShadow:'var(--elev-4-shadow), var(--elev-4-edge)'}}><b style={{color:'var(--text-primary)'}}>Z4</b><span className="k">overlay · elev-4 · layer 100</span></div>
+      </div>
+    </Section>
+    <Section title="Borders & edges" sub="From plain outline to full material edge. Default for cards is hairline + top-edge light.">
+      <div className="grid" style={{'--min':'180px'}}>
+        {[['None',{background:'var(--surface-primary)'}],['Hairline',{background:'var(--surface-primary)',border:'1px solid var(--border-default)'}],['+ Top-edge light',{background:'var(--light-top-edge), var(--surface-primary)',border:'1px solid var(--border-default)'}],['+ Bevel',{background:'var(--light-top-edge), var(--surface-primary)',border:'1px solid var(--border-default)',boxShadow:'var(--elev-2-edge)'}],['Liquid edge',{background:'var(--glass-liquid-sheen), var(--surface-primary)',border:'1px solid var(--glass-liquid-border)',boxShadow:'var(--glass-liquid-edge)'}],['Inset well',{background:'var(--surface-inset)',border:'1px solid var(--border-subtle)',boxShadow:'var(--inset-well)'}]].map(([n,s])=>
+          <div key={n} className="tile" style={{minHeight:110,...s}}><b style={{color:'var(--text-primary)'}}>{n}</b></div>)}
+      </div>
+    </Section>
+    <Section title="Typography" sub="Inter 400–700, JetBrains Mono. Financial values use tabular numerals.">
+      <div className="wt-mat-frosted" style={{borderRadius:12,padding:24,display:'flex',flexDirection:'column',gap:14}}>
+        <div className="wt-display-lg">Every check, watched.</div>
+        <div className="wt-page-heading">Page heading · Monitors</div>
+        <div className="wt-section-heading">Section heading · Response time</div>
+        <div className="wt-card-title">Card title · api.acme.dev</div>
+        <div className="wt-body" style={{maxWidth:640}}>Body. Watchtower checks your endpoints from five regions and alerts your team in seconds. Every workspace is private.</div>
+        <div className="wt-caption">Caption · Last checked 12s ago</div>
+        <div style={{display:'flex',gap:28,flexWrap:'wrap',alignItems:'baseline'}}><span className="wt-value-xl">99.98%</span><span className="wt-value-lg">$12,480.00</span><span className="wt-value-md">1,204ms</span><span className="wt-value-sm">0.835230</span><span className="wt-code" style={{color:'var(--text-strong)'}}>GET /health 200</span></div>
+      </div>
+    </Section>
+    <Section title="Spacing, radius & shadows" sub="Semantic spacing and touch-target tokens resolve live below."><FoundationsExtra/></Section>
+    <Section title="Components" sub="Representative components using the foundation.">
+      <div style={{display:'flex',flexDirection:'column',gap:16}}>
+        <div className="wt-mat-frosted" style={{borderRadius:12,padding:20,display:'flex',flexWrap:'wrap',gap:12,alignItems:'center'}}>
+          <Button icon="plus">Primary</Button><Button variant="secondary" icon="download">Secondary · metal</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button><Button variant="danger">Danger</Button><Button disabled>Disabled</Button>
+          <IconButton icon="bell" label="Alerts" dot/><IconButton icon="plus" label="Add" variant="primary"/><IconButton icon="settings" label="Settings" shape="square"/>
+          <Badge tone="up" dot>Operational</Badge><Badge tone="down" dot>Down</Badge><Badge tone="yellow">New</Badge>
+        </div>
+        <div className="grid" style={{'--min':'240px'}}>
+          <Input label="URL" mono placeholder="https://api.acme.dev/health"/><Input label="Search" icon="search" placeholder="Search monitors" kbd="⌘K"/><Input label="Timeout" defaultValue="api" error="Enter a number in ms"/><Input label="Disabled" disabled defaultValue="Read only"/>
+        </div>
+        <div style={{display:'flex',flexWrap:'wrap',gap:20,alignItems:'center'}}><Tabs value={tab} onChange={setTab} items={['1h','24h','7d','30d']}/><Select icon="calendar" options={['Last 24 hours','Last 7 days']}/><Switch defaultChecked label="Email alerts"/><Checkbox defaultChecked label="Frankfurt"/></div>
+        <div className="grid" style={{'--min':'220px'}}>
+          <Card title="Frosted (default)" icon="activity"><span className="wt-body-sm">Standard Z1 card.</span></Card>
+          <Card variant="smoked" title="Smoked" icon="layers"><span className="wt-body-sm">Structural panel.</span></Card>
+          <Card variant="liquid" title="Liquid" icon="sparkles"><span className="wt-body-sm">Floating / selected.</span></Card>
+          <Card variant="metal" title="Metal" icon="sliders-horizontal"><span className="wt-body-sm">Control tray.</span></Card>
+          <Card variant="yellow" title="Neon" eyebrow="Featured"><span style={{fontSize:14}}>One per screen.</span></Card>
+          <StatCard icon="timer" label="p95" value="142" unit="ms" delta="4.1%" deltaDirection="down" deltaTone="up" caption="vs last week"/>
+        </div>
+        <div style={{display:'flex',gap:16,flexWrap:'wrap'}}><Toast tone="down" title="api.acme.dev is down" message="Failing from 3 of 5 regions since 14:02 UTC."/><Toast tone="up" title="Recovered after 4m 12s"/></div>
+      </div>
+    </Section>
+    <Section title="More components" sub="Tables, navigation, command palette, forms in every state."><MoreComponents/></Section>
+    <Section title="Spatial interactions" sub="Phase 2 · Neon Spatial Motion. Development controls apply to this section only."><SpatialSection/></Section>
+    <Section title="Data visualization" sub="Charts, metric cards, tooltips, loading, empty, error and partial states. Hover or focus a chart and use ←/→."><DataVizSection/></Section>
+    <Section title="Accessibility" sub="Focus, disabled, colour independence, reduced motion, touch targets."><A11ySection/></Section>
+    <Section title="Contrast audit" sub="Text tokens against each surface, composited on the base background."><Contrast/></Section>
+    <Section title="Responsive preview" sub="375 · 768 · 1440."><ResponsivePreview/></Section>
+  </div></>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script></body></html>

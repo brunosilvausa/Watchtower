@@ -1,0 +1,50 @@
+[WebServer] (node:61517) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ next start --hostname 127.0.0.1 --port 3137
+[WebServer] (node:61560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:61840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [desktop] › tests/browser/foundation.spec.ts:24:5 › landing demos are local, keyboard accessible and clearly illustrative (5.5s)
+
+
+  1) [desktop] › tests/browser/foundation.spec.ts:24:5 › landing demos are local, keyboard accessible and clearly illustrative 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('tablist', { name: 'Fases do incidente' })
+    Expected: "vertical"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" getByRole('tablist', { name: 'Fases do incidente' }) with timeout 5000ms
+      - waiting for getByRole('tablist', { name: 'Fases do incidente' })
+        14 × locator resolved to <div role="tablist" class="ds-tab-list" aria-label="Fases do incidente">…</div>
+           - unexpected value "null"
+
+
+      39 |   const firstTab = page.getByRole("tab", { name: /DETECÇÃO/ });
+      40 |   await firstTab.focus();
+    > 41 |   await expect(page.getByRole("tablist", { name: "Fases do incidente" })).toHaveAttribute("aria-orientation", "vertical");
+         |                                                                           ^
+      42 |   await firstTab.press("ArrowDown");
+      43 |   await expect(page.getByRole("tab", { name: /NOTIFICAÇÃO/ })).toBeFocused();
+      44 |   await expect(page.getByRole("tabpanel").filter({ visible: true })).toContainText("nenhum alerta é enviado");
+        at /Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/tests/browser/foundation.spec.ts:41:75
+
+    Error Context: test-results/production/foundation-landing-demos-a-6ed13-le-and-clearly-illustrative-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production/foundation-landing-demos-a-6ed13-le-and-clearly-illustrative-desktop/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/production/foundation-landing-demos-a-6ed13-le-and-clearly-illustrative-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [desktop] › tests/browser/foundation.spec.ts:24:5 › landing demos are local, keyboard accessible and clearly illustrative 

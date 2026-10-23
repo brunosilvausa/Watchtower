@@ -1,0 +1,76 @@
+/* Neon Spatial Glass — material system. Four materials + an overlay variant.
+   Rule: one backdrop-filter per stack. Content inside a material uses --surface-nested*, never another material. */
+:root{
+/* A · Frosted glass — cards, panels, widgets */
+--glass-frosted-bg:rgba(255,255,255,.065);
+--glass-frosted-blur:24px;
+--glass-frosted-border:rgba(255,255,255,.1);
+--glass-frosted-filter:blur(var(--glass-frosted-blur)) saturate(150%); /* @kind other */
+/* B · Smoked glass — sidebar, navigation, large structural surfaces */
+--glass-smoked-bg:rgba(8,11,15,.84);
+--glass-smoked-blur:28px;
+--glass-smoked-border:rgba(255,255,255,.06);
+--glass-smoked-filter:blur(var(--glass-smoked-blur)) saturate(140%); /* @kind other */
+/* B+ · Overlay — menus, tooltips, dialogs, toasts (smoked, denser for legibility) */
+--glass-overlay-bg:rgba(20,24,30,.94);
+--glass-overlay-border:rgba(255,255,255,.16);
+/* C · Liquid glass — floating controls, selected elements, high-priority overlays */
+--glass-liquid-bg:rgba(255,255,255,.09);
+--glass-liquid-blur:20px;
+--glass-liquid-border:rgba(255,255,255,.22);
+--glass-liquid-filter:blur(var(--glass-liquid-blur)) saturate(180%) brightness(1.06); /* @kind other */
+--glass-liquid-sheen:linear-gradient(150deg,rgba(255,255,255,.24) 0%,rgba(255,255,255,.06) 24%,rgba(255,255,255,0) 48%,rgba(255,255,255,.05) 100%); /* @kind other */
+--glass-liquid-edge:inset 1px 1px 0 rgba(255,255,255,.34),inset 0 0 0 1px rgba(255,255,255,.04),inset 0 -10px 20px rgba(255,255,255,.035),inset -1px -1px 0 rgba(0,0,0,.32); /* @kind shadow */
+/* D · Brushed metal — secondary controls, structural accents */
+--metal-bg:linear-gradient(180deg,#2A313A 0%,#1D232A 52%,#171C22 100%); /* @kind other */
+--metal-bg-hover:linear-gradient(180deg,#323A44 0%,#222931 52%,#1B2027 100%); /* @kind other */
+--metal-bg-active:linear-gradient(180deg,#1A1F25,#1E242B); /* @kind other */
+--metal-brush:repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,rgba(255,255,255,0) 1px 3px); /* @kind other */
+--metal-border:rgba(255,255,255,.1);
+--metal-edge:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.45); /* @kind shadow */
+/* Neon — the one illuminated material (primary buttons, featured cards, CTA bands) */
+--material-neon-bg:linear-gradient(180deg,var(--wt-yellow-hi) 0%,var(--primary) 48%,var(--wt-yellow-lo) 100%); /* @kind other */
+--material-neon-bg-hover:linear-gradient(180deg,#F9FF7A 0%,#F2FF1F 48%,#E2F000 100%); /* @kind other */
+--material-neon-bg-active:linear-gradient(180deg,var(--primary-active),#CCDB00); /* @kind other */
+--material-neon-surface:linear-gradient(160deg,#F6FF52 0%,var(--primary) 42%,#DCEB00 100%); /* @kind other */
+--material-neon-border:rgba(255,255,255,.38);
+--material-neon-edge:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.14); /* @kind shadow */
+--material-neon-surface-edge:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(0,0,0,.18); /* @kind shadow */
+/* Solid structural — opaque, no blur: dense data, tables, structural panels */
+--solid-bg:var(--surface-primary);
+--solid-border:rgba(255,255,255,.06);
+/* Directional rim light per material (light from top-left) */
+--rim-solid:inset 0 1px 0 rgba(255,255,255,.04),inset 0 -1px 0 rgba(0,0,0,.3); /* @kind shadow */
+--rim-smoked:inset 0 1px 0 rgba(255,255,255,.07),inset 1px 0 0 rgba(255,255,255,.025),inset 0 -1px 0 rgba(0,0,0,.45); /* @kind shadow */
+--rim-frosted:inset 1px 1px 0 rgba(255,255,255,.13),inset -1px -1px 0 rgba(0,0,0,.24); /* @kind shadow */
+--rim-overlay:inset 0 1px 0 rgba(255,255,255,.14),inset 1px 0 0 rgba(255,255,255,.04),inset 0 -1px 0 rgba(0,0,0,.4); /* @kind shadow */
+--smoked-depth:linear-gradient(180deg,rgba(255,255,255,.03) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.18) 100%); /* @kind other */
+/* Shared surface light */
+--light-top-edge:linear-gradient(165deg,rgba(255,255,255,.075) 0%,rgba(255,255,255,.02) 38%,rgba(255,255,255,0) 60%); /* @kind other */
+--inset-well:inset 0 1px 2px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.04); /* @kind shadow */
+
+/* Legacy aliases */
+--glass-bg:var(--glass-frosted-bg);
+--glass-bg-elevated:rgba(255,255,255,.08);
+--glass-bg-soft:rgba(255,255,255,.035);
+--glass-menu:var(--glass-overlay-bg);
+--glass-nav:var(--glass-smoked-bg);
+--glass-border:var(--glass-frosted-border);
+--glass-border-soft:var(--border-subtle);
+--glass-highlight:rgba(255,255,255,.06);
+--glass-blur:var(--glass-frosted-blur);
+--glass-saturation:150%; /* @kind other */
+--glass-filter:var(--glass-frosted-filter); /* @kind other */
+--glass-inset:var(--elev-1-edge); /* @kind shadow */
+}
+/* Fallbacks: no backdrop-filter, or user prefers reduced transparency → solid materials */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+:root{--glass-frosted-bg:var(--surface-primary);--glass-smoked-bg:var(--background-elevated);--glass-overlay-bg:var(--surface-primary);--glass-liquid-bg:var(--surface-secondary);--glass-bg-elevated:var(--surface-secondary);--glass-bg-soft:var(--background-elevated)}
+}
+@media (prefers-reduced-transparency:reduce){
+:root{--glass-frosted-bg:var(--surface-primary);--glass-smoked-bg:var(--background-elevated);--glass-overlay-bg:var(--surface-primary);--glass-liquid-bg:var(--surface-secondary);--glass-bg-elevated:var(--surface-secondary);--glass-bg-soft:var(--background-elevated);
+--glass-frosted-filter:none; /* @kind other */
+--glass-smoked-filter:none; /* @kind other */
+--glass-liquid-filter:none; /* @kind other */
+}
+}

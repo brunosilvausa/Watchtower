@@ -7,4 +7,4 @@ GRANT CONNECT ON DATABASE watchtower_dev TO watchtower_migrator, watchtower_app,
 GRANT CREATE ON DATABASE watchtower_dev TO watchtower_migrator;
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
 GRANT USAGE, CREATE ON SCHEMA public TO watchtower_migrator;
-GRANT USAGE ON SCHEMA public TO watchtower_app;
+GRANT USAGE ON SCHEMA public TO watchtower_app, watchtower_worker;

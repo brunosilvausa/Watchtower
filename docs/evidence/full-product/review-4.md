@@ -1,0 +1,19 @@
+# Final review cycle 4 — frontend flows and accessibility
+
+Date: 2026-10-22. Status: **CHANGES REQUIRED**. Independent source review; no application edits, build, server, provider activation or browser rerun. Inspected auth, workspace shell, monitor/resource editors, dashboard/detail/settings/public-status views, API DTOs and shared navigation/dialog controls. Current source includes the cycle-1 frontend remedies.
+
+## Material findings
+
+1. **P1 — Navigation silently changes the selected workspace.** `apps/web/src/app/dashboard/product-shell.tsx:25` always selects `rows[0]` after mounting; the workspace selection exists only in component state. `design-system/components/navigation.tsx:13` and `design-system/components/actions.tsx:18` render ordinary anchors. Reproduction: an account owns workspaces A and B; choose B, then click Monitores in the sidebar. The full navigation remounts the shell and selects A. A subsequent Add operation writes to A despite the user's B context. Monitor detail links from B also fetch their identifier under A and fail. Persist the active workspace per identity, validate it against the freshly authorized list before use, and restore it across navigation/reload. Clear workspace-specific search/notification state on a switch. Add a real two-workspace navigation/reload regression that asserts both selected workspace and request destination.
+
+2. **P2 — Clicking the already selected dashboard range leaves a permanent loading state.** `apps/web/src/app/dashboard/product-views.tsx:46` passes a callback that sets loading=true and then sets range to the chosen value. The data-fetch effect depends on range/revision; clicking the currently selected 24h button changes neither, so there is no fetch/finally to clear loading. Dashboard content disappears and Refresh is disabled while loading. Reproduction: open overview, wait for results, click the active 24h button. Guard unchanged ranges or explicitly reload; verify repeated selection of each active range keeps the dashboard usable.
+
+3. **P2 — Mobile users have no normal sign-out control.** `apps/web/src/app/dashboard/product-shell.tsx:42–43` places Sign out only in the desktop sidebar; the MobileNav includes navigation, New workspace and workspace selector but no Sign out. `product.module.css:10` hides that sidebar below 900px. Settings only offers session-management controls, not a normal sign-out action; revoking the current session also leaves the shell mounted. Add the same sign-out action to the mobile navigation, handle failures, and exercise it at the mobile viewport through keyboard activation and redirection to login.
+
+## Remedy observations and coverage
+
+Cycle-1 protected API workflow replacement is now explicit (`monitor-steps.ts` and checkbox); channel edit/enable controls preserve empty credentials; maintenance edits, status preview/branding/response time, new workspace creation, feature flags and observed metrics have concrete render paths. These observations do not replace the controller's pending integrated browser regressions. Native dialog semantics, accessible labels, Tab trapping, Escape handling and focus restoration are present in the shared controls; no concrete source-level keyboard trap was found in this pass.
+
+Other usability follow-ups: saved language/timezone preferences are not propagated back into the shell until it reloads or changes workspace; incident rows provide acknowledge/resolve but no direct timeline link; revoked API keys remain listed without a visible revoked-state indicator. These are distinct from the three blocking findings above.
+
+No browser, screen-reader, physical passkey or external-provider checks were run in this review. Existing reported browser results are historical until the controller reruns the integrated build after remediation.

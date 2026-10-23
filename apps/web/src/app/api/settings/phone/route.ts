@@ -1,0 +1,5 @@
+import { requestPhoneVerification,verifyPhone,AccessError } from '@watchtower/database';
+import { requireActor } from '@/lib/access';
+import { apiError,requestBody,privateJson,requireOrigin } from '@/lib/server/http';
+export async function POST(request:Request){try{requireOrigin(request);const actor=await requireActor(request.headers);const body=await requestBody(request) as {workspaceId?:string;phone?:string};if(typeof body.workspaceId!=='string'||typeof body.phone!=='string')throw new AccessError(400,'Workspace and phone required');return privateJson(await requestPhoneVerification(actor,body.workspaceId,body.phone),202);}catch(error){return apiError(error);}}
+export async function PATCH(request:Request){try{requireOrigin(request);const actor=await requireActor(request.headers);const body=await requestBody(request) as {code?:string};if(typeof body.code!=='string')throw new AccessError(400,'Verification code required');return privateJson(await verifyPhone(actor,body.code));}catch(error){return apiError(error);}}

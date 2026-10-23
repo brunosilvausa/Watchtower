@@ -1,0 +1,8 @@
+"use client";
+import { Card } from "@design-system";
+import type { Translate } from "./product-shell";
+import styles from "./product.module.css";
+export type PlatformMetricsData = { mrr: { currency: string; monthlyAmount: number; subscriptions: number }[]; mrrState: string; churn: { state: string; ratePercent: number | null; activeAtStart: number | null; cancelled: number | null; windowDays: number; historyStartedAt?: string }; queue: { state: string; count: number }[]; queueOldestPendingAt?: string | null };
+export function PlatformMetrics({ metrics, t }: { metrics?: PlatformMetricsData; t: Translate }) {
+  return <div className={styles.grid}><Card title="MRR"><p>{metrics?.mrrState ?? t("Sem observações", "No observations")}</p>{metrics?.mrr.map(row => <p key={row.currency}>{row.monthlyAmount.toLocaleString(undefined, { style: "currency", currency: row.currency.toUpperCase() })} · {row.subscriptions} {t("assinaturas", "subscriptions")}</p>)}</Card><Card title={t("Churn em 30 dias", "30-day churn")}><p className="wt-value-lg">{metrics?.churn.ratePercent == null ? t("Histórico insuficiente", "Insufficient history") : `${metrics.churn.ratePercent.toFixed(2)}%`}</p>{metrics && <p>{metrics.churn.cancelled ?? "—"} {t("cancelamentos", "cancellations")} · {t("Base inicial", "Starting base")}: {metrics.churn.activeAtStart ?? "—"}</p>}</Card><Card title={t("Fila de entregas", "Delivery queue")}>{metrics?.queue.map(row => <p key={row.state}>{row.state}: {row.count}</p>)}{!metrics?.queue.length && <p>{t("Nenhum trabalho registrado", "No recorded jobs")}</p>}{metrics?.queueOldestPendingAt && <p>{t("Pendente mais antigo", "Oldest pending")}: {metrics.queueOldestPendingAt}</p>}</Card></div>;
+}

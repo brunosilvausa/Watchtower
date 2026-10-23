@@ -20,5 +20,5 @@ export const memberships = pgTable('memberships', {
 }, (table) => [
   primaryKey({ columns: [table.workspaceId, table.userId] }),
   index('memberships_user_idx').on(table.userId),
-  check('membership_role', sql`${table.role} = 'owner'`),
+  check('membership_role', sql`${table.role} in ('owner','admin','editor','viewer')`),
 ]);

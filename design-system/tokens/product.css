@@ -1,0 +1,10 @@
+/* Reference product geometry; shared semantic values, not a second theme. */
+:root {
+ --product-donut-total-size:20px; --product-donut-label-size:8px; --product-chart-plot-height:180px;
+ --auth-label-height:17px;
+ --product-shell-gap:20px; --product-topbar-height:56px; --product-search-width:420px;
+ --auth-form-width:400px; --auth-preview-width:580px; --auth-panel-padding:40px;
+ --product-stat-height:150px; --product-chart-panel-height:300px; --product-donut-size:160px;
+ --product-table-min:960px; --product-nav-row:40px; --product-code-line:22px;
+ --product-nav-icon:28px; --product-brand-size:22px; --product-history-height:28px;
+}

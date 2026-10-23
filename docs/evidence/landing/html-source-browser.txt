@@ -1,0 +1,25 @@
+$ playwright test
+[WebServer] (node:77502) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ next start --hostname 127.0.0.1 --port 3137
+[WebServer] (node:77519) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:77608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring (999ms)
+  ✓   2 [desktop] › tests/browser/foundation.spec.ts:19:5 › design system and raw references are not public production routes (21ms)
+  ✓   3 [desktop] › tests/browser/foundation.spec.ts:24:5 › landing demos are local, keyboard accessible and clearly illustrative (400ms)
+  ✓   4 [desktop] › tests/browser/foundation.spec.ts:61:5 › motion controls stop animation and incident autoplay (1.2s)
+  ✓   5 [desktop] › tests/browser/foundation.spec.ts:82:5 › tablet and narrow layouts retain content without horizontal overflow (1.1s)
+(node:77677) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   6 [mobile] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring (3.5s)
+  ✓   7 [mobile] › tests/browser/foundation.spec.ts:19:5 › design system and raw references are not public production routes (30ms)
+  ✓   8 [mobile] › tests/browser/foundation.spec.ts:24:5 › landing demos are local, keyboard accessible and clearly illustrative (447ms)
+  ✓   9 [mobile] › tests/browser/foundation.spec.ts:61:5 › motion controls stop animation and incident autoplay (1.2s)
+  ✓  10 [mobile] › tests/browser/foundation.spec.ts:82:5 › tablet and narrow layouts retain content without horizontal overflow (6.6s)
+
+  10 passed (16.9s)

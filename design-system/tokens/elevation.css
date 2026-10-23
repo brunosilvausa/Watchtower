@@ -1,0 +1,38 @@
+/* Z0–Z4 spatial elevation. Each level = material + shadow + edge light + layer. */
+:root{
+--elev-0-shadow:none; /* @kind shadow */
+--elev-1-shadow:0 1px 1px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.24);
+--elev-2-shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.36),0 22px 48px rgba(0,0,0,.18);
+--elev-3-shadow:0 2px 4px rgba(0,0,0,.42),0 18px 40px rgba(0,0,0,.46),0 36px 80px rgba(0,0,0,.28);
+--elev-4-shadow:0 4px 8px rgba(0,0,0,.45),0 28px 64px rgba(0,0,0,.56),0 60px 120px rgba(0,0,0,.4);
+--elev-1-edge:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -1px 0 rgba(0,0,0,.22); /* @kind shadow */
+--elev-2-edge:inset 0 1px 0 rgba(255,255,255,.1),inset 0 -1px 0 rgba(0,0,0,.26); /* @kind shadow */
+--elev-3-edge:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.3); /* @kind shadow */
+--elev-4-edge:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.34); /* @kind shadow */
+--layer-0:0; /* @kind other */
+--layer-1:1; /* @kind other */
+--layer-2:20; /* @kind other */
+--layer-3:50; /* @kind other */
+--layer-4:100; /* @kind other */
+--layer-toast:200; /* @kind other */
+--scrim:rgba(4,6,8,.66);
+
+/* Depth aliases (canonical values live in motion.css → --spatial-*) */
+--depth-perspective:var(--spatial-perspective);
+--depth-low:4px;
+--depth-medium:12px;
+--depth-high:24px;
+--depth-feature:var(--spatial-featured-z);
+--tilt-max:var(--spatial-tilt-maximum); /* @kind other */
+
+/* Legacy aliases */
+--shadow-low:var(--elev-1-shadow);
+--shadow-floating:var(--elev-2-shadow);
+--shadow-high:var(--elev-3-shadow);
+--z-base:var(--layer-0); /* @kind other */
+--z-raised:var(--layer-1); /* @kind other */
+--z-nav:var(--layer-2); /* @kind other */
+--z-menu:var(--layer-3); /* @kind other */
+--z-overlay:var(--layer-4); /* @kind other */
+--z-toast:var(--layer-toast); /* @kind other */
+}

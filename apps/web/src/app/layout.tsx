@@ -3,13 +3,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Watchtower — Private beta",
-  description: "Your systems. One command center.",
+  description: "Conheça a proposta do Watchtower para acompanhar seus sites e APIs. Beta privada por convite.",
   robots: { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="dark h-full antialiased">
+    <html lang="pt-BR" className="dark h-full antialiased">
       <body className="min-h-full">{children}</body>
     </html>
   );

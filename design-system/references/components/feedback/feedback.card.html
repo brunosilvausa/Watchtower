@@ -1,0 +1,22 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Feedback" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../vendor/react-18.3.1.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="../../vendor/react-dom-18.3.1.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../../vendor/babel-7.29.0.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.col{display:flex;flex-direction:column;gap:16px}.lbl{font-size:11px;font-family:var(--font-mono);color:var(--text-muted);width:84px;flex:none}</style>
+</head><body class="wt-ambient"><div id="root"></div>
+<script type="text/babel">
+const NS = window.WatchtowerDesignSystem_54a35d;
+const { Toast, Tooltip, Dialog, Button, Input, IconButton } = NS;
+function Demo(){const [o,setO]=React.useState(false);return <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
+<div className="col"><Toast tone="down" title="api.acme.dev is down" message="Failing from 3 of 5 regions since 14:02 UTC." onClose={()=>{}} /><Toast tone="up" title="Recovered after 4m 12s" /></div>
+<div className="col" style={{background:'var(--surface-card)',border:'1px solid var(--hairline-strong)',borderRadius:12,padding:20,gap:14}}>
+<div style={{fontSize:18,fontWeight:700,color:'var(--on-dark)',letterSpacing:'-0.3px'}}>Add monitor</div>
+<Input mono placeholder="https://" />
+<div className="row" style={{justifyContent:'space-between'}}><Tooltip content="Checked from 5 regions"><IconButton icon="globe" label="Regions" variant="ghost" /></Tooltip><div className="row" style={{gap:8}}><Button variant="ghost" size="sm" onClick={()=>setO(true)}>Open dialog</Button><Button size="sm">Create</Button></div></div>
+</div>
+<Dialog open={o} onClose={()=>setO(false)} title="Delete monitor?" description="History for this monitor will be removed from the workspace." actions={<><Button variant="ghost" onClick={()=>setO(false)}>Cancel</Button><Button variant="danger">Delete</Button></>} />
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

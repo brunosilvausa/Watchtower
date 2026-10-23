@@ -1,0 +1,37 @@
+<!-- @dsCard group="Website UI kit" viewport="1440x900" name="Marketing site" subtitle="Home + pricing" -->
+<!doctype html><html><head><meta charset="utf-8"><title>Watchtower — Website</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="../../vendor/react-18.3.1.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="../../vendor/react-dom-18.3.1.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../../vendor/babel-7.29.0.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script>window.WT = Object.assign({ Tilt: function (p) { return p.children; } }, window.WatchtowerDesignSystem_54a35d);</script>
+<style>
+.site-split-7-5{grid-template-columns:7fr 5fr}.site-split-5-7{grid-template-columns:5fr 7fr}
+.site-stats{grid-template-columns:repeat(4,minmax(0,1fr))}.site-features{grid-template-columns:repeat(3,minmax(0,1fr))}.site-pricing{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1023px){.site-split-7-5,.site-split-5-7{grid-template-columns:minmax(0,1fr)}.site-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.site-features,.site-pricing{grid-template-columns:repeat(2,minmax(0,1fr))}.site-features>:first-child{grid-row:auto!important;grid-column:1/-1}}
+@media (max-width:767px){.site-features,.site-pricing{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:479px){.site-stats{grid-template-columns:minmax(0,1fr)}}
+body{overflow-x:hidden}
+</style>
+</head><body><a class="wt-skip-link" href="#main">Skip to content</a><div id="root"></div>
+<script type="text/babel" src="Home.jsx"></script>
+<script type="text/babel" src="Pricing.jsx"></script>
+<script type="text/babel">
+function Site() {
+  const [page, setPage] = React.useState('home');
+  const go = l => { setPage(l === 'Pricing' ? 'pricing' : 'home'); window.scrollTo(0, 0); };
+  return <>
+    {WT.AmbientBackdrop && <WT.AmbientBackdrop />}
+    <div style={{ position: 'relative', zIndex: 1 }}>
+    <WT.TopNav active={page === 'pricing' ? 'Pricing' : undefined} onNav={go} onCta={() => go('Pricing')} />
+    <main id="main" tabIndex={-1} style={{ outline: 'none' }}>
+    {page === 'home' ? <><Hero onCta={() => go('Pricing')} /><Stats /><Features /><ProductShot /><CtaBand onCta={() => go('Pricing')} /></>
+      : <><PricingPage /><CtaBand /></>}
+    </main>
+    <WT.Footer />
+    </div>
+  </>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Site />);
+</script></body></html>

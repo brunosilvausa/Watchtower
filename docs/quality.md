@@ -8,11 +8,13 @@
 | `pnpm typecheck` | Shared declarations, worker TypeScript and Next route-generated types |
 | `pnpm lint:typed` | Floating/misused promise checks across application/package TS, including tests |
 | `pnpm lint:rules` | Toolkit custom-rule positive/negative fixtures |
-| `pnpm test` | Configuration secrecy, redaction, process values, pool lifecycle and local-target validation |
+| `pnpm test` | Configuration/secrets, authorization, probe and provider adapters, parser and UI helper regressions |
 | `pnpm build` | Shared packages, worker executable and Next production build |
 | `pnpm test:worker` | Real Node process startup, resource event and graceful termination |
 | `pnpm test:db` | Real local PostgreSQL migrations, grants, constraints, RLS and transaction reset |
-| `pnpm test:browser` | Built page in Chromium desktop/mobile; title, heading, no forms/errors/overflow |
+| `pnpm test:browser` | Built landing in Chromium desktop/mobile; demonstrations, navigation, keyboard, motion and production route exclusion |
+| `pnpm test:product` | Real local signup/verification/login, workspace and monitor persistence, protected API edits, channel lifecycle, errors and responsive layouts |
+| `pnpm test:design-system` | Shared interactive components on desktop/tablet/mobile |
 | `pnpm db:usage` | Local storage measurements; not cloud billing |
 
 `pnpm check` composes the credential-free checks and worker smoke. Database/browser tests are explicit separate commands. Never connect or migrate during build/check. No remote CI run is claimed; local commands are ready for later CI integration.
@@ -21,7 +23,7 @@ Typed lint uses a dedicated monorepo TS project; its measured duration is record
 
 ## Required future gates
 
-M3/M5 must test simultaneous timeouts, worker saturation, restarts and overload recovery. M5 must validate actual deployment SSRF/network protections using controlled targets, and correlate usage to real costs. Those tests cannot be completed before the transport/scheduler and deployment exist. No mock PASS substitutes for them.
+The local worker suites exercise leases, retries, quorum, restart fencing and failed deliveries. Deployment qualification must still exercise sustained load, hosted SSRF/network protections, real provider interoperability, restore procedures and cost attribution. No local or mocked PASS substitutes for those operational checks.
 
 ## Review and harness procedure
 
@@ -32,3 +34,7 @@ Reusable read-only security review: load [prompt 13 at the fixed revision](https
 Harness2 mode is **native method adaptation**, not execution of Google's CLI or benchmark. Reusable invocation: read [prompt 15 at the fixed revision](https://github.com/soumatheusgomes/vibe-coding-toolkit/blob/790a895304e0c08b70a5b215c9d334f1c86b816c/docs/prompts/15-harness-improvement.md); verify the canonical instruction index and relevant command discovery in a fresh context. Only an observed failure justifies one bounded disposable candidate comparison. Do not change model, provider, authentication, permissions or billing.
 
 Record observed retrieval and review separately from client restart/plugin discovery. Updating these sources requires reviewing the revision diff and rerunning affected smoke cases. Do not automatically update global skills or install hooks.
+
+## Design-system checks — 2026-10-22
+
+`pnpm test:design-system` owns development port 3138 and tests interactive components at desktop/tablet/mobile sizes. Production smoke owns 3137 and verifies the showcase is unavailable. Their artifact directories are separate. `node scripts/verify-design-references.mjs` checks local links and source independence. A dedicated loopback 3139 server can reproduce historical HTML checks with `node scripts/check-design-reference-browser.mjs`; references never enter public routes. See the dated setup evidence for executed results and limitations.

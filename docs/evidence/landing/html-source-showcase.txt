@@ -1,0 +1,26 @@
+$ playwright test --config playwright.design-system.config.ts
+[WebServer] (node:63637) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ next dev --hostname 127.0.0.1 --port 3138
+[WebServer] (node:63654) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:63683) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⨯ Another next dev server is already running.
+[WebServer] 
+[WebServer] - Local:        http://127.0.0.1:3000
+[WebServer] - PID:          6842
+[WebServer] - Dir:          /Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/apps/web
+[WebServer] - Log:          .next/dev/logs/next-development.log
+[WebServer] 
+[WebServer] You can access the existing server at http://127.0.0.1:3000,
+[WebServer] or run kill 6842 to stop it and start a new one.
+[WebServer] [ELIFECYCLE] Command failed with exit code 1.
+[WebServer] Error: [WebServer] ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL
+[WebServer] 
+[WebServer]   × "pnpm recursive run" failed in /Users/brunosilva/Documents/ChatGPT/
+[WebServer]   │ Watchtower/Watchtower/apps/web
+[WebServer] 
+Error: Process from config.webServer was not able to start. Exit code: 1
+
+[ELIFECYCLE] Command failed with exit code 1.

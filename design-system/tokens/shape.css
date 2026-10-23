@@ -1,0 +1,13 @@
+:root{
+--radius-xs:4px;
+--radius-sm:6px;
+--radius-md:8px;
+--radius-lg:12px;
+--radius-pill:9999px;
+--radius-full:50%;
+--border-hairline:1px solid var(--hairline);
+--border-glass:1px solid var(--glass-frosted-border);
+--border-strong-line:1px solid var(--hairline-strong);
+--focus-ring:0 0 0 1px var(--primary);
+--shadow-none:none;
+}

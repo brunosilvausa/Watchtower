@@ -1,0 +1,64 @@
+:root{
+--fw-regular:400; /* @kind font */
+--fw-medium:500; /* @kind font */
+--fw-semibold:600; /* @kind font */
+--fw-bold:700; /* @kind font */
+--numeric-features:"tnum" 1,"cv01" 1; /* @kind font */
+/* Scale (size / line-height / tracking) */
+--display-xl-size:72px; /* @kind font */
+--display-xl-lh:1.05; /* @kind font */
+--display-xl-ls:-2.5px; /* @kind font */
+--display-lg-size:56px; /* @kind font */
+--display-lg-lh:1.1; /* @kind font */
+--display-lg-ls:-2px; /* @kind font */
+--display-md-size:40px; /* @kind font */
+--display-md-lh:1.15; /* @kind font */
+--display-md-ls:-1.5px; /* @kind font */
+--display-sm-size:32px; /* @kind font */
+--display-sm-lh:1.2; /* @kind font */
+--display-sm-ls:-1px; /* @kind font */
+--title-lg-size:24px; /* @kind font */
+--title-lg-lh:1.3; /* @kind font */
+--title-lg-ls:-0.3px; /* @kind font */
+--title-md-size:18px; /* @kind font */
+--title-md-lh:1.4; /* @kind font */
+--title-sm-size:16px; /* @kind font */
+--title-sm-lh:1.4; /* @kind font */
+--stat-display-size:56px; /* @kind font */
+--stat-display-lh:1.0; /* @kind font */
+--stat-display-ls:-1.5px; /* @kind font */
+--body-md-size:16px; /* @kind font */
+--body-md-lh:1.55; /* @kind font */
+--body-sm-size:14px; /* @kind font */
+--body-sm-lh:1.55; /* @kind font */
+--caption-size:13px; /* @kind font */
+--caption-lh:1.4; /* @kind font */
+--caption-upper-size:12px; /* @kind font */
+--caption-upper-lh:1.4; /* @kind font */
+--caption-upper-ls:1.5px; /* @kind font */
+--code-size:14px; /* @kind font */
+--code-lh:1.55; /* @kind font */
+--button-size:14px; /* @kind font */
+--button-lh:1.0; /* @kind font */
+--nav-link-size:14px; /* @kind font */
+--nav-link-lh:1.4; /* @kind font */
+/* Semantic roles — CSS font shorthand */
+--type-display:700 var(--display-xl-size)/var(--display-xl-lh) var(--font-sans); /* @kind font */
+--type-page-heading:700 32px/1.2 var(--font-sans); /* @kind font */
+--type-page-heading-ls:-1px; /* @kind font */
+--type-section-heading:700 24px/1.3 var(--font-sans); /* @kind font */
+--type-section-heading-ls:-0.4px; /* @kind font */
+--type-card-title:600 16px/1.4 var(--font-sans); /* @kind font */
+--type-body:400 15px/1.55 var(--font-sans); /* @kind font */
+--type-body-sm:400 14px/1.5 var(--font-sans); /* @kind font */
+--type-caption:500 12px/1.4 var(--font-sans); /* @kind font */
+--type-label:500 13px/1.3 var(--font-sans); /* @kind font */
+--type-overline:600 12px/1.4 var(--font-sans); /* @kind font */
+--type-overline-ls:1.5px; /* @kind font */
+--type-value-xl:700 56px/1 var(--font-sans); /* @kind font */
+--type-value-lg:700 32px/1.1 var(--font-sans); /* @kind font */
+--type-value-md:600 18px/1.3 var(--font-sans); /* @kind font */
+--type-value-sm:600 14px/1.4 var(--font-sans); /* @kind font */
+--type-value-ls:-1px; /* @kind font */
+--type-mono:400 13px/1.55 var(--font-mono); /* @kind font */
+}

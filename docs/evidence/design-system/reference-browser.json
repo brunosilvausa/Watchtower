@@ -1,0 +1,212 @@
+[
+  {
+    "entry": "thumbnail.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 10
+  },
+  {
+    "entry": "guidelines/brand-wordmark.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 21
+  },
+  {
+    "entry": "guidelines/brand-yellow-band.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 44
+  },
+  {
+    "entry": "guidelines/colors-brand.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 141
+  },
+  {
+    "entry": "guidelines/colors-code.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 108
+  },
+  {
+    "entry": "guidelines/colors-nested.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 188
+  },
+  {
+    "entry": "guidelines/colors-status.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 135
+  },
+  {
+    "entry": "guidelines/colors-surfaces.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 223
+  },
+  {
+    "entry": "guidelines/colors-text.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 249
+  },
+  {
+    "entry": "guidelines/elevation.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 152
+  },
+  {
+    "entry": "guidelines/glass.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 254
+  },
+  {
+    "entry": "guidelines/lighting.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 101
+  },
+  {
+    "entry": "guidelines/neon.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 97
+  },
+  {
+    "entry": "guidelines/radii.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 61
+  },
+  {
+    "entry": "guidelines/spacing-in-use.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 78
+  },
+  {
+    "entry": "guidelines/spacing-scale.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 150
+  },
+  {
+    "entry": "guidelines/type-body.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 252
+  },
+  {
+    "entry": "guidelines/type-display.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 130
+  },
+  {
+    "entry": "guidelines/type-mono.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 112
+  },
+  {
+    "entry": "guidelines/type-semantic.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 259
+  },
+  {
+    "entry": "guidelines/type-stat.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 55
+  },
+  {
+    "entry": "guidelines/type-titles.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 91
+  },
+  {
+    "entry": "playground/index.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 10860
+  },
+  {
+    "entry": "components/core/core.card.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 186
+  },
+  {
+    "entry": "components/data/data.card.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 786
+  },
+  {
+    "entry": "components/feedback/feedback.card.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 119
+  },
+  {
+    "entry": "components/forms/forms.card.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 150
+  },
+  {
+    "entry": "components/navigation/navigation.card.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 160
+  },
+  {
+    "entry": "ui_kits/app/index.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 2174
+  },
+  {
+    "entry": "ui_kits/website/index.html",
+    "errors": [],
+    "failed": [],
+    "external": [],
+    "bodyCharacters": 2209
+  }
+]

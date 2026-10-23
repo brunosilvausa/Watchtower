@@ -22,3 +22,12 @@ export async function closeDatabase(): Promise<void> {
   await state?.pool.end();
 }
 export * from './schema.js';
+export * from './product.js';
+export * from './product-service.js';
+export { monitorSchema, plans, toCsv } from './product-validation.js';
+export { tokenHash, verifyPagePassword, decryptSecret } from './product-secrets.js';
+export { verifyBillingSignature } from './product-billing.js';
+export * from './jobs.js';
+export * from './product-public.js';
+export * from './jobs-private.js';
+export * from './product-lifecycle.js';

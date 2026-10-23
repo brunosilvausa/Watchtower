@@ -1,0 +1,94 @@
+$ playwright test
+[WebServer] (node:10217) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ next start --hostname 127.0.0.1 --port 3137
+[WebServer] (node:10232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:10240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [desktop] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring (5.4s)
+(node:10317) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [desktop] › tests/browser/foundation.spec.ts:17:5 › design system and raw references are not public production routes (22ms)
+(node:10318) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [mobile] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring (5.1s)
+(node:10388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 [mobile] › tests/browser/foundation.spec.ts:17:5 › design system and raw references are not public production routes (19ms)
+
+
+  1) [desktop] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Seu site caiu às 03:12. Você soube às 03:12.', level: 1 })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Seu site caiu às 03:12. Você soube às 03:12.', level: 1 }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Seu site caiu às 03:12. Você soube às 03:12.', level: 1 })
+
+
+       6 |   await page.goto("/");
+       7 |   await expect(page).toHaveTitle("Watchtower — Private beta");
+    >  8 |   await expect(page.getByRole("heading", { name: "Seu site caiu às 03:12. Você soube às 03:12.", level: 1 })).toBeVisible();
+         |                                                                                                               ^
+       9 |   await expect(page.getByRole("heading", { name: "Acesso à beta por convite" })).toBeVisible();
+      10 |   await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
+      11 |   await expect(page.locator("form")).toHaveCount(0);
+        at /Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/tests/browser/foundation.spec.ts:8:111
+
+    Error Context: test-results/production/foundation-private-beta-fo-c5922-abling-signup-or-monitoring-desktop/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production/foundation-private-beta-fo-c5922-abling-signup-or-monitoring-desktop/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/production/foundation-private-beta-fo-c5922-abling-signup-or-monitoring-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [mobile] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Seu site caiu às 03:12. Você soube às 03:12.', level: 1 })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Seu site caiu às 03:12. Você soube às 03:12.', level: 1 }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Seu site caiu às 03:12. Você soube às 03:12.', level: 1 })
+
+
+       6 |   await page.goto("/");
+       7 |   await expect(page).toHaveTitle("Watchtower — Private beta");
+    >  8 |   await expect(page.getByRole("heading", { name: "Seu site caiu às 03:12. Você soube às 03:12.", level: 1 })).toBeVisible();
+         |                                                                                                               ^
+       9 |   await expect(page.getByRole("heading", { name: "Acesso à beta por convite" })).toBeVisible();
+      10 |   await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
+      11 |   await expect(page.locator("form")).toHaveCount(0);
+        at /Users/brunosilva/Documents/ChatGPT/Watchtower/Watchtower/tests/browser/foundation.spec.ts:8:111
+
+    Error Context: test-results/production/foundation-private-beta-fo-c5922-abling-signup-or-monitoring-mobile/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/production/foundation-private-beta-fo-c5922-abling-signup-or-monitoring-mobile/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/production/foundation-private-beta-fo-c5922-abling-signup-or-monitoring-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [desktop] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring 
+    [mobile] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring 
+  2 passed (12.3s)
+[ELIFECYCLE] Command failed with exit code 1.

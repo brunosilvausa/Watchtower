@@ -1,0 +1,22 @@
+{
+  "sourceFiles": 181,
+  "preservedByteIdentical": 169,
+  "adapted": [
+    "_ds_bundle.js",
+    "components/core/core.card.html",
+    "components/data/data.card.html",
+    "components/feedback/feedback.card.html",
+    "components/forms/forms.card.html",
+    "components/navigation/navigation.card.html",
+    "playground/index.html",
+    "styles.css",
+    "tokens/fonts.css",
+    "tokens/shape.css",
+    "ui_kits/app/index.html",
+    "ui_kits/website/index.html"
+  ],
+  "missing": [],
+  "sourceUnchanged": true,
+  "originalDirectoryRemoved": true,
+  "removalScope": "design-system-export only, after application/reference checks"
+}

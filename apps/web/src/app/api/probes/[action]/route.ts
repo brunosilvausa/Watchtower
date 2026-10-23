@@ -1,0 +1,3 @@
+import { handlePrivateProbe,AccessError,consumeRateLimit,tokenHash } from '@watchtower/database';
+import { apiError,privateJson,requestBody } from '@/lib/server/http';
+export async function POST(request:Request,context:{params:Promise<{action:string}>}){try{const token=request.headers.get('authorization')?.replace(/^Bearer /,'');if(!token||token.length>100)throw new AccessError(401,'Probe token required');await consumeRateLimit(`probe:${tokenHash(token)}`,120,60);return privateJson(await handlePrivateProbe(token,(await context.params).action,await requestBody(request)));}catch(error){return apiError(error);}}

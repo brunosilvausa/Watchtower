@@ -1,0 +1,5 @@
+import { enrollPrivateProbe,listPrivateProbes,revokePrivateProbe,AccessError,consumeRateLimit } from '@watchtower/database';
+import { requireActor } from '@/lib/access';
+import { apiError,privateJson,requestBody,requireOrigin } from '@/lib/server/http';
+async function handle(request:Request,context:{params:Promise<{workspaceId:string}>}){try{const {workspaceId}=await context.params;const actor=await requireActor(request.headers);if(request.method==='GET')return privateJson(await listPrivateProbes(actor,workspaceId));requireOrigin(request);await consumeRateLimit(`probes:${actor.userId}`,10,60);const body=await requestBody(request);if(request.method==='POST')return privateJson(await enrollPrivateProbe(actor,workspaceId,body as Parameters<typeof enrollPrivateProbe>[2]),201);const id=(body as {id?:unknown}).id;if(typeof id!=='string')throw new AccessError(400,'Probe ID required');await revokePrivateProbe(actor,workspaceId,id);return privateJson({id});}catch(error){return apiError(error);}}
+export {handle as GET,handle as POST,handle as DELETE};

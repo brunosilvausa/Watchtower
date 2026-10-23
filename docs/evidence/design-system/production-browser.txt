@@ -1,0 +1,19 @@
+$ playwright test
+[WebServer] (node:43857) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ next start --hostname 127.0.0.1 --port 3137
+[WebServer] (node:43872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:43880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring (379ms)
+  ✓  2 [desktop] › tests/browser/foundation.spec.ts:17:5 › design system and raw references are not public production routes (28ms)
+(node:43894) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [mobile] › tests/browser/foundation.spec.ts:3:5 › private beta foundation renders without enabling signup or monitoring (341ms)
+  ✓  4 [mobile] › tests/browser/foundation.spec.ts:17:5 › design system and raw references are not public production routes (17ms)
+
+  4 passed (2.0s)

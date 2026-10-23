@@ -1,0 +1,13 @@
+"use client";
+import { Button, Card, LineChart } from "@design-system";
+import { rowText, type ProductRow } from "@/lib/product-client";
+import type { Translate } from "./product-shell";
+import { useProductDate } from "./date-preferences";
+import styles from "./product.module.css";
+export function DetailView({ data, t }: { data: unknown; t: Translate }) {
+  const formatDate = useProductDate();
+  const detail = data as { monitor?: ProductRow; results?: ProductRow[]; incidents?: ProductRow[]; events?: ProductRow[] };
+  if (!detail.monitor) return <Card title={t("Linha do tempo", "Timeline")}><ul>{(detail.events ?? []).map(row => <li key={row.id}>{formatDate(row.created_at)} · {rowText(row, "kind")} · {rowText(row, "message")}</li>)}</ul></Card>;
+  const monitor = detail.monitor;
+  return <div className={styles.stack}><Button variant="ghost" href="/dashboard/monitors">← {t("Todos os monitores", "All monitors")}</Button><Card title={String(monitor.name)}><p>{rowText(monitor, "type").toUpperCase()} · {rowText(monitor, "target")}</p><p>{t("Estado", "State")}: {(monitor.paused ? t("Pausado", "Paused") : rowText(monitor, "state"))} · {t("Intervalo", "Interval")}: {rowText(monitor, "interval_seconds")}s</p><code>{monitor.id}</code></Card><Card title={t("Tempo de resposta", "Response time")}><LineChart label={t("Duração das observações (ms)", "Observation duration (ms)")} labels={(detail.results ?? []).map(row => formatDate(row.observed_at))} series={[{ name: "ms", primary: true, data: (detail.results ?? []).map(row => typeof row.duration_ms === "number" ? row.duration_ms : null) }]} /></Card><Card title={t("Observações recentes", "Recent observations")}><div className={styles.table}><table><thead><tr><th>{t("Horário", "Time")}</th><th>{t("Estado", "State")}</th><th>{t("Duração", "Duration")}</th><th>HTTP</th><th>{t("Erro", "Error")}</th></tr></thead><tbody>{(detail.results ?? []).map(row => <tr key={row.id}><td>{formatDate(row.observed_at)}</td><td>{rowText(row, "state")}</td><td>{rowText(row, "duration_ms")} ms</td><td>{rowText(row, "status_code")}</td><td>{rowText(row, "error_code")}</td></tr>)}</tbody></table>{!detail.results?.length && <p>{t("Nenhuma observação disponível. Verifique a configuração e a disponibilidade dos probes.", "No observations available. Check configuration and probe availability.")}</p>}</div></Card><Card title={t("Histórico de incidentes", "Incident history")}>{detail.incidents?.length ? detail.incidents.map(row => <p key={row.id}><a href={`/dashboard/incidents/${row.id}`}>{rowText(row, "id")}</a> · {rowText(row, "state")}</p>) : <p>{t("Nenhum incidente registrado.", "No incidents recorded.")}</p>}</Card></div>;
+}

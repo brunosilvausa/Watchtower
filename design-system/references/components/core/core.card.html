@@ -1,0 +1,20 @@
+<!-- @dsCard group="Components" viewport="700x330" name="Core" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../vendor/react-18.3.1.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="../../vendor/react-dom-18.3.1.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../../vendor/babel-7.29.0.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.col{display:flex;flex-direction:column;gap:16px}.lbl{font-size:11px;font-family:var(--font-mono);color:var(--text-muted);width:84px;flex:none}</style>
+</head><body class="wt-ambient"><div id="root"></div>
+<script type="text/babel">
+const NS = window.WatchtowerDesignSystem_54a35d;
+const { Button, IconButton, Badge, StatusDot, Avatar, Icon, Tilt } = NS;
+function Demo(){return <div className="col">
+<div className="row"><span className="lbl">button</span><Button icon="plus">Add monitor</Button><Button variant="secondary" icon="download">Export</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button><Button variant="danger" icon="trash-2">Delete</Button></div>
+<div className="row"><span className="lbl">size/state</span><Button size="sm">Small</Button><Button size="lg" iconRight="arrow-right">Large</Button><Button disabled>Disabled</Button><div style={{background:'var(--primary)',padding:6,borderRadius:10}}><Button variant="inverse">Inverse</Button></div></div>
+<div className="row"><span className="lbl">icon btn</span><IconButton icon="bell" label="Alerts" dot /><IconButton icon="moon" label="Theme" /><IconButton icon="settings" label="Settings" shape="square" /><IconButton icon="plus" label="Add" variant="primary" /><IconButton icon="ellipsis" label="More" variant="ghost" /></div>
+<div className="row"><span className="lbl">badge</span><Badge tone="up" dot>Operational</Badge><Badge tone="down" dot>Down</Badge><Badge tone="degraded" dot>Degraded</Badge><Badge tone="info">Maintenance</Badge><Badge tone="yellow">New</Badge><Badge>03</Badge><Badge tone="up">+1.10%</Badge></div>
+<div className="row"><span className="lbl">dot/avatar</span><StatusDot status="up" /><StatusDot status="down" pulse /><StatusDot status="degraded" /><StatusDot status="paused" /><Avatar name="Maya Ortiz" /><Avatar name="Dev Patel" size={40} /><Icon name="activity" color="var(--primary)" /><Icon name="shield-check" /><Tilt radius="12px"><div className="wt-glass" style={{borderRadius:12,padding:"10px 14px",fontSize:12,color:"var(--on-dark)"}}>Hover me · Tilt</div></Tilt></div>
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

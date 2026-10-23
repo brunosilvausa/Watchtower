@@ -1,0 +1,77 @@
+import { expect, test } from "@playwright/test";
+
+test("showcase uses local assets, renders responsive materials and real interactive states", async ({ page, baseURL }, info) => {
+  const errors: string[] = [];
+  const external: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  page.on("request", request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith("data:")) external.push(request.url()); });
+  await page.goto("/design-system");
+  await expect(page.getByRole("heading", { name: "Clarity with dimension." })).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+  expect(await page.evaluate(() => document.fonts.check('16px "Inter"') && document.fonts.check('14px "JetBrains Mono"'))).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(await page.locator(".wt-mat-frosted").first().evaluate(node => getComputedStyle(node).backdropFilter)).toContain("blur");
+  expect(await page.locator("html").evaluate(node => getComputedStyle(node).getPropertyValue("--primary").trim().toUpperCase())).toBe("#EFFF00");
+  await page.getByRole("button", { name: "primary", exact: true }).click();
+  await expect(page.getByText("Demo actions: 1")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Loading button" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Disabled button" })).toBeDisabled();
+  for (const name of ["Disabled link", "Loading link"]) {
+    await expect(page.getByRole("link", { name })).not.toHaveAttribute("href");
+    await expect(page.getByRole("link", { name })).toHaveAttribute("aria-disabled", "true");
+  }
+  await page.getByLabel("Time range").selectOption("7d");
+  await expect(page.getByLabel("Time range")).toHaveValue("7d");
+  await expect(page.getByLabel("Empty options")).toBeDisabled();
+  await page.getByLabel("Include comparison").uncheck();
+  await expect(page.getByLabel("Include comparison")).not.toBeChecked();
+  await page.getByRole("tab", { name: "Overview", exact: true }).focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByRole("tab", { name: "Details", exact: true })).toBeFocused();
+  await expect(page.getByRole("tabpanel", { name: "Details" })).toBeVisible();
+  const trigger = page.getByRole("button", { name: "Open dialog" });
+  await trigger.click();
+  await expect(page.getByRole("dialog", { name: "Inspect dialog" })).toBeVisible();
+  await page.keyboard.press("Shift+Tab");
+  expect(await page.evaluate(() => Boolean(document.activeElement?.closest("dialog")))).toBe(true);
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).not.toBeVisible();
+  await expect(trigger).toBeFocused();
+  await page.getByRole("button", { name: "Show toast" }).click();
+  await expect(page.getByText("Example complete")).toBeVisible();
+  await page.getByRole("button", { name: "Dismiss notification" }).click();
+  await expect(page.getByText("Example complete")).not.toBeVisible();
+  await page.getByRole("button", { name: "Search", exact: true }).click();
+  await page.getByLabel("Search commands").fill("tokens");
+  await page.getByRole("button", { name: "Inspect tokens" }).click();
+  await expect(page.getByText("Token inspection selected.")).toBeVisible();
+  const chart = page.getByRole("group", { name: "Response time · synthetic" });
+  await chart.focus(); await page.keyboard.press("Home");
+  await expect(page.getByText("09:00: Current 82ms · Previous 98ms")).toBeVisible();
+  await page.keyboard.press("ArrowRight"); await page.keyboard.press("ArrowRight"); await page.keyboard.press("ArrowRight");
+  await expect(page.getByText("12:00: Current Missing · Previous 160ms")).toBeVisible();
+  await page.getByRole("button", { name: "Select api-example" }).click();
+  await expect(page.getByRole("button", { name: "Select api-example" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByText("Unknown: Missing", { exact: true })).toBeVisible();
+  await expect(page.getByText("Measurement unavailable", { exact: true })).toBeVisible();
+  if (info.project.name !== "mobile") {
+    await page.getByRole("button", { name: "Notifications" }).hover();
+    const tooltip = page.getByRole("tooltip", { name: "Notification preferences" });
+    await expect(tooltip).toBeVisible();
+    const box = await tooltip.boundingBox();
+    if (!box) throw new Error("Tooltip has no bounds");
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 8 });
+    await expect(tooltip).toBeVisible();
+  }
+  await page.getByRole("switch", { name: "Reduce motion", exact: true }).check();
+  await expect(page.locator("html")).toHaveAttribute("data-motion", "reduce");
+  expect(await page.locator(".ds-tilt").first().evaluate(node => { const transform = getComputedStyle(node).transform; return transform === "none" || new DOMMatrix(transform).isIdentity; })).toBe(true);
+  await page.getByRole("switch", { name: "Reduce motion", exact: true }).uncheck();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.getByText("Motion: reduced", { exact: true })).toBeVisible();
+  expect(await page.locator(".ds-tilt").first().evaluate(node => { const transform = getComputedStyle(node).transform; return transform === "none" || new DOMMatrix(transform).isIdentity; })).toBe(true);
+  expect(errors).toEqual([]); expect(external).toEqual([]);
+  await page.screenshot({ path: `docs/evidence/design-system/showcase-${info.project.name}.png`, fullPage: true });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({ path: `docs/evidence/design-system/viewport-${info.project.name}.png` });
+});

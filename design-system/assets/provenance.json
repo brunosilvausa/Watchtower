@@ -1,0 +1,37 @@
+[
+  {
+    "package": "@fontsource/inter",
+    "version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource/inter/-/inter-5.3.0.tgz",
+    "integrity": "sha512-RofMylZmjlJEfELXeNHFWBRcSs75rGU/6bV2S2jfnvv/3rPXPGe0LgUJTklcHZ9lM4OZmAVFhcJPnACfb91A3g=="
+  },
+  {
+    "package": "@fontsource/jetbrains-mono",
+    "version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource/jetbrains-mono/-/jetbrains-mono-5.3.0.tgz",
+    "integrity": "sha512-fqDfB5I9f1p1TV486aUgB9t8zP84P0O1FtQR5Ol9vjwPy+S+EIGlVYm1cvj2W5shcZMTg2nZFdVMoH5wFu8a1A=="
+  },
+  {
+    "package": "lucide-static",
+    "version": "0.460.0",
+    "source": "https://registry.npmjs.org/lucide-static/-/lucide-static-0.460.0.tgz",
+    "integrity": "sha512-X6pIdg7jVxv7YQ/uR241hwhNiztcAfmj181TbcX7HCxxk/3mGaRtAc6b2ftUvQBufbJE6ehgyzO2uVsa604tWg=="
+  },
+  {
+    "source": "https://unpkg.com/react@18.3.1/umd/react.development.js",
+    "file": "references/vendor/react-18.3.1.js"
+  },
+  {
+    "source": "https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js",
+    "file": "references/vendor/react-dom-18.3.1.js"
+  },
+  {
+    "source": "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js",
+    "file": "references/vendor/babel-7.29.0.js"
+  },
+  {
+    "alias": "icons/pie-chart.svg",
+    "source": "https://unpkg.com/lucide-static@0.460.0/icons/chart-pie.svg",
+    "reason": "Historical kit uses the old icon name; identical local SVG."
+  }
+]

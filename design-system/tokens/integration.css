@@ -1,0 +1,26 @@
+/* App/shadcn aliases point to the export's canonical semantic values. */
+:root {
+  color-scheme: dark;
+  --background: var(--background-base); --foreground: var(--text-primary);
+  --card: var(--surface-primary); --card-foreground: var(--text-primary);
+  --popover: var(--surface-primary); --popover-foreground: var(--text-primary);
+  --secondary: var(--surface-secondary); --secondary-foreground: var(--text-primary);
+  --muted: var(--surface-nested); --muted-foreground: var(--text-tertiary);
+  --accent: var(--surface-nested-hover); --accent-foreground: var(--text-primary);
+  --destructive: var(--status-down); --border: var(--border-default);
+  --input: var(--border-strong); --ring: var(--primary); --radius: var(--radius-lg);
+  --chart-1: var(--chart-series-primary); --chart-2: var(--chart-series-1);
+  --chart-3: var(--chart-series-2); --chart-4: var(--chart-series-3); --chart-5: var(--chart-series-muted);
+  --sidebar: var(--background-elevated); --sidebar-foreground: var(--text-secondary);
+  --sidebar-primary: var(--primary); --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--surface-nested); --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--border-subtle); --sidebar-ring: var(--primary);
+  --control-sm: 32px; --control-lg: 48px; --control-padding: 20px;
+  --icon-sm: 16px; --icon-md: 18px; --icon-lg: 24px;
+  --stroke-width: 1.5; --focus-width: 2px; --focus-offset: 3px;
+  --dialog-width: 520px; --text-max: 620px; --hero-max: 960px;
+  --section-gap: 56px; --chart-height: 200px; --chart-min-width: 280px;
+  --gauge-height: 12px; --skeleton-height: 18px; --avatar-size: 36px;
+  --disabled-opacity: .5; --reflection-opacity: .12; --spinner-duration: 700ms;
+  --status-down-text: #ff8b91; --status-info-text: #8bbcff;
+}
