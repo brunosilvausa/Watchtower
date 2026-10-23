@@ -1,0 +1,136 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  CI: 'true'
+  NEXT_TELEMETRY_DISABLED: '1'
+  WATCHTOWER_WORKER_ENABLED: 'false'
+
+jobs:
+  quality:
+    name: Quality and production build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        id: install
+      - name: Check CI report privacy and local setup
+        id: helpers
+        run: node --test scripts/ci-report.test.mjs scripts/setup-product-local.test.mjs
+      - name: Lint, types, unit tests, production builds and worker smoke
+        id: check
+        run: pnpm check
+      - name: Prepare failure summary
+        if: failure()
+        env:
+          CI_CHECKS: '{"install":"${{ steps.install.outcome }}","helpers":"${{ steps.helpers.outcome }}","check":"${{ steps.check.outcome }}"}'
+        run: node scripts/ci-report.mjs
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: failure()
+        with:
+          name: quality-failure
+          path: ci-reports/summary.json
+          retention-days: 7
+          if-no-files-found: warn
+
+  integration:
+    name: PostgreSQL and production browsers
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        id: install
+      - name: Generate ephemeral local configuration
+        id: config
+        run: pnpm setup:product
+      - name: Start isolated PostgreSQL and build packages
+        id: database
+        run: |
+          pnpm db:up
+          pnpm build:packages
+          pnpm db:migrate
+      - name: PostgreSQL integration tests
+        id: db-tests
+        run: pnpm test:db
+      - name: Install Chromium and system dependencies
+        id: chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Build production application
+        id: build
+        run: pnpm --filter @watchtower/web build
+      - name: Production landing and route isolation
+        id: foundation
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/foundation.json
+        run: pnpm test:browser --reporter=list,json
+      - name: Persisted authenticated product journeys
+        id: product
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/product.json
+        run: pnpm test:product --reporter=list,json
+      - name: Stop job-owned database
+        if: always()
+        run: pnpm db:stop
+      - name: Prepare failure summary without traces or authentication payloads
+        if: failure()
+        env:
+          CI_CHECKS: '{"install":"${{ steps.install.outcome }}","config":"${{ steps.config.outcome }}","database":"${{ steps.database.outcome }}","db-tests":"${{ steps.db-tests.outcome }}","chromium":"${{ steps.chromium.outcome }}","build":"${{ steps.build.outcome }}","foundation":"${{ steps.foundation.outcome }}","product":"${{ steps.product.outcome }}"}'
+        run: node scripts/ci-report.mjs "$RUNNER_TEMP/foundation.json" "$RUNNER_TEMP/product.json"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: failure()
+        with:
+          name: integration-failure
+          path: ci-reports/summary.json
+          retention-days: 7
+          if-no-files-found: warn
+
+  showcase:
+    name: Development showcase browsers
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        id: install
+      - name: Build shared packages
+        id: build
+        run: pnpm build:packages
+      - name: Install Chromium and system dependencies
+        id: chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Development-only interactive showcase
+        id: showcase
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/showcase.json
+        run: pnpm test:design-system --reporter=list,json
+      - name: Prepare failure summary
+        if: failure()
+        env:
+          CI_CHECKS: '{"install":"${{ steps.install.outcome }}","build":"${{ steps.build.outcome }}","chromium":"${{ steps.chromium.outcome }}","showcase":"${{ steps.showcase.outcome }}"}'
+        run: node scripts/ci-report.mjs "$RUNNER_TEMP/showcase.json"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: failure()
+        with:
+          name: showcase-failure
+          path: ci-reports/summary.json
+          retention-days: 7
+          if-no-files-found: warn

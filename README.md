@@ -24,6 +24,8 @@ The earlier foundation documentation below remains historical context, not a cla
 
 # Watchtower
 
+[Continuous integration](docs/ci.md) runs quality, PostgreSQL integration, production browser and development showcase checks independently on pushes and pull requests to `main`.
+
 Your systems. One command center.
 
 Private-beta SaaS foundation. **Current implementation: M1 only.** The local web page is a static introduction; the worker reports its own process resources. Authentication, invitations, monitoring, incidents and notifications are not implemented or activated.

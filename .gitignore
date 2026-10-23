@@ -18,3 +18,4 @@ docs/private/
 
 # Local product email spool and secret-bearing development artifacts
 .local/
+ci-reports/
